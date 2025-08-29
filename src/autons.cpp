@@ -1,13 +1,14 @@
 #include "main.h"
 #include "subsystems.hpp"
 
+extern pros::adi::DigitalOut middle;
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
 // https://ez-robotics.github.io/EZ-Template/
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 110;
+const int DRIVE_SPEED = 127;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 // Was slew the issue??
@@ -21,7 +22,7 @@ void default_constants() {
   chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
   chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
-  chassis.pid_odom_angular_constants_set(8, 0.0, 55);      // Angular control for odom motions
+  chassis.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions
   chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
 
   // Exit conditions
@@ -87,18 +88,42 @@ void lifted_constants() {
 
 void firstautoyay() {
   default_constants();
+  chassis.odom_xyt_set(-48_in, -14_in, 96_deg);
   intake1.move(127);
-  chassis.pid_odom_set({{{1.24_in, 10.24_in, 34.38_deg}, fwd, DRIVE_SPEED},
-                        {{1.12_in, 25.29_in, -34.52_deg}, fwd, 80},
-                        {{-6.49_in, 33.62_in, -46.44_deg}, fwd, DRIVE_SPEED}},
+  chassis.pid_odom_set({
+                           {{-18_in, -22_in, 130_deg}, fwd, 50},  // GETS THE BLOCKS
+                           // {{6.63_in, 18.42_in, 44.7_deg}, fwd, DRIVE_SPEED},
+                           {{-12_in, -15_in}, fwd, DRIVE_SPEED}  // THIS IS THE MIDDLE GOAL
+                       },
                        true);
   chassis.pid_wait();
-  pros::delay(500);
-  intake.move(-100);
+  chassis.pid_turn_set(50_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(3, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
 
-  // chassis.pid_odom_set({{0_in, 0_in, 0_deg}, rev, DRIVE_SPEED},
-  //                      true);
-  // chassis.pid_wait();
+  pros::delay(800);
+  chassis.pid_wait_quick_chain();
+
+  intake.move(-115);
+  pros::delay(1200);
+  chassis.pid_drive_set(-6, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+  intake1.move(127);
+
+  chassis.pid_odom_set({{{-12_in, 18_in}, fwd, DRIVE_SPEED}},  // SECOND FUCKING BLOCKS
+                       true);
+
+  chassis.pid_wait_quick_chain();
+  pros::delay(700);
+  chassis.pid_odom_set({{{-3_in, 8_in, 340_deg}, rev, 65}},  // THE TOP MIDDLE GOAL
+                       true);
+
+  chassis.pid_wait_quick_chain();
+  middle.set_value(1);
+  intake.move(127);
+
+
 }
 
 void turn_example() {
@@ -130,13 +155,13 @@ void odom_drive_example() {
   // You can replace pid_drive_set with pid_odom_set and your robot will
   // have better error correction.
   default_constants();
-  chassis.pid_odom_set(40_in, DRIVE_SPEED, true);
+  chassis.pid_odom_set(96_in, DRIVE_SPEED, true);
   chassis.pid_wait();
 
-  chassis.pid_odom_set(-20_in, DRIVE_SPEED);
+  chassis.pid_odom_set(-48_in, DRIVE_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_odom_set(-20_in, DRIVE_SPEED);
+  chassis.pid_odom_set(-48_in, DRIVE_SPEED);
   chassis.pid_wait();
 }
 

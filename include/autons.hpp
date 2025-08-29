@@ -3,6 +3,7 @@
 #include "EZ-Template/drive/drive.hpp"
 
 // extern pros::Motor intake;
+// extern pros::adi::DigitalOut middle;
 
 void default_constants();
 void lifted_constants();

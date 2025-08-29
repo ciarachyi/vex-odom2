@@ -22,7 +22,7 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(15, 2, 2.3, 1);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel horiz_tracker(11, 2, 2.3, 1);  // This tracking wheel is perpendicular to the drive wheels
 ez::tracking_wheel vert_tracker(13, 2, 0, 1);     // This tracking wheel is parallel to the drive wheels
 
 ez::Piston descore('A');
@@ -75,9 +75,11 @@ void initialize() {
   ez::as::auton_selector.autons_add({
 
       {"get some blocks", firstautoyay},
+      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+      
       {"Turn\n\nTurn 3 times.", turn_example},
       {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
-      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+
 
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
 

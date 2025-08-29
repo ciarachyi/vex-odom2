@@ -4,11 +4,12 @@
 #include "api.h"
 
 extern Drive chassis;
+// extern pros::adi::DigitalOut middle;
 
-inline pros::MotorGroup intake({-11, 20});
+inline pros::MotorGroup intake({-15, 20});
 
 inline pros::Motor intake1(20);  //bottom
-inline pros::Motor intake2(-11);  //top
+inline pros::Motor intake2(-15);  //top
 
 // inline pros::MotorGroup intake ({17, 10});
 
