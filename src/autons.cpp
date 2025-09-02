@@ -8,7 +8,7 @@ extern pros::adi::DigitalOut middle;
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 127;
+const int DRIVE_SPEED = 110;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 // Was slew the issue??
@@ -132,12 +132,12 @@ void firstautoyay() {
   chassis.odom_xyt_set(8.2_in, -2_in, 40_deg);
   intake1.move(127);
   chassis.pid_odom_set({
-                          {{23_in, 17_in, 40_deg}, fwd, 90}, //set up in front of blocks
+                          {{22_in, 17_in, 40_deg}, fwd, 50}, //set up in front of blocks
                           
-                          {{12.5_in, 26.73_in, -40_deg}, fwd, 35},
+                          {{12.5_in, 26.73_in, -45_deg}, fwd, 50},
                           
                           //TURN TO NEGATIVE 40
-                          {{7_in, 33_in, -45_deg}, fwd, 35},  // Middle goal
+                          {{7_in, 33_in, -45_deg}, fwd, DRIVE_SPEED},  // Middle goal
                            //DRIVE FORWARD 11
 
                            // {{6.63_in, 18.42_in, 44.7_deg}, fwd, DRIVE_SPEED},
