@@ -18,7 +18,7 @@ const int SWING_SPEED = 110;
 // 162
 void default_constants() {
   // P, I, D, and Start I
-  chassis.pid_drive_constants_set(20.0, 0.0, 145.0);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_drive_constants_set(20.0, 0.0, 150.0);         // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
   chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
@@ -96,12 +96,12 @@ void firstautoyay() {
   chassis.odom_xyt_set(8.2_in, -2_in, 40_deg);
   intake1.move(127);
   chassis.pid_odom_set({
-                           {{22_in, 17_in, 40_deg}, fwd, 50},  // set up in front of blocks
+                           {{22_in, 17_in, 40_deg}, fwd, DRIVE_SPEED},  // set up in front of blocks
 
                            {{12.5_in, 26.73_in, -45_deg}, fwd, 50},
 
                            // TURN TO NEGATIVE 40
-                           {{7_in, 33_in, -45_deg}, fwd, DRIVE_SPEED},  // Middle goal
+                           {{7_in, 28_in, -45_deg}, fwd, DRIVE_SPEED},  // Middle goal
                                                                         // DRIVE FORWARD 11
 
                            // {{6.63_in, 18.42_in, 44.7_deg}, fwd, DRIVE_SPEED},
@@ -109,17 +109,23 @@ void firstautoyay() {
                        },
                        true);
   chassis.pid_wait_quick_chain();
-  chassis.pid_turn_set(-40_deg, TURN_SPEED);
+  // chassis.pid_turn_set(-40_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   chassis.pid_drive_set(4, DRIVE_SPEED, true);
   chassis.pid_wait_quick_chain();
 
-  pros::delay(100);
+  pros::delay(350);
   chassis.pid_wait_quick_chain();
 
   intake.move(-115);
-  pros::delay(1500);
-  chassis.pid_drive_set(-6, DRIVE_SPEED, true);
+  pros::delay(1600);
+  chassis.pid_drive_set(-12, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set({-24, 24}, fwd, 90, true);
+  chassis.pid_odom_set({{{7_in, 28_in, -45_deg}, fwd, 50}},true);
+
+
+
 
   // chassis.pid_wait_quick_chain();
   // intake1.move(127);
