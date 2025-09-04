@@ -76,8 +76,12 @@ void initialize() {
 
       {"get some blocks", firstautoyay},
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
-      
+      {"woohoo.", odometry_accuracy_test},
       {"Turn\n\nTurn 3 times.", turn_example},
+      
+     
+      
+      
       {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
 
 
