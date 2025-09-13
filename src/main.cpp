@@ -74,7 +74,12 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
-      {"get some blocks", firstautoyay},
+      {"top middle goal and left long goal", topAndLeft},
+      {"solo wp", firstautoyay},
+  
+      {"bottom middle goal and right long goal", bottomAndRight},
+      {"use all blocks for long goal", longGoal},
+      {"score in both middle goals", middleGoals},
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
       {"woohoo.", odometry_accuracy_test},
       {"Turn\n\nTurn 3 times.", turn_example},

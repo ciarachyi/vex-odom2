@@ -26,3 +26,7 @@ void odom_boomerang_injected_pure_pursuit_example();
 void measure_offsets();
 void angles();
 void firstautoyay();
+void topAndLeft();
+void bottomAndRight();
+void longGoal();
+void middleGoals();
