@@ -9,6 +9,11 @@ void odometry_accuracy_test();
 void default_constants();
 void lifted_constants();
 
+void skills();
+void adjustedSolo();
+void rightSide();
+void blueSolo();
+
 void testStuff();
 void drive_example();
 void turn_example();
@@ -25,6 +30,8 @@ void odom_boomerang_example();
 void odom_boomerang_injected_pure_pursuit_example();
 void measure_offsets();
 void angles();
+
+
 void firstautoyay();
 void topAndLeft();
 void bottomAndRight();

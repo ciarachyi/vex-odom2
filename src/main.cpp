@@ -10,8 +10,8 @@
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-16, -17, -19},  // Left Chassis Ports (negative port will reverse it!)
-    {12, 18, 9},      // Right Chassis Ports (negative port will reverse it!)
+    {-13, -12, -11},  // Left Chassis Ports (negative port will reverse it!)
+    {17, 19, 18},      // Right Chassis Ports (negative port will reverse it!)
 
     10,    // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
@@ -22,14 +22,13 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(11, 2, 2.3, 1);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(13, 2, 0, 1);     // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel horiz_tracker(11, 2, 1.35, 1);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(13, 2, 0, 1);      // This tracking wheel is parallel to the drive wheels
 
 ez::Piston descore('A');
 ez::Piston middle('B');
 ez::Piston matchload('C');
 ez::Piston pod('D');
-
 
 // pros::Motor intake1(10, pros::v5::MotorGear::blue, pros::v5::MotorUnits::degrees);
 // pros::Motor intake2(10, pros::v5::MotorGear::blue, pros::v5::MotorUnits::degrees);
@@ -75,26 +74,30 @@ void initialize() {
   ez::as::auton_selector.autons_add({
 
       {"top middle goal and left long goal", topAndLeft},
-      {"solo wp", firstautoyay},
-  
+      {"clear stuff", skills},
+      
       {"bottom middle goal and right long goal", bottomAndRight},
+      
+      {"blue solo", blueSolo},
+      {"solo wp", firstautoyay},
+      {"ride side long goal", rightSide},
+
+      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+
+      {"pid solo", adjustedSolo},
+
       {"use all blocks for long goal", longGoal},
       {"score in both middle goals", middleGoals},
-      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+
       {"woohoo.", odometry_accuracy_test},
       {"Turn\n\nTurn 3 times.", turn_example},
-      
-     
-      
-      
-      {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
 
+      {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
 
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
 
       {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
       {"Turns based on angle degree measurements", angles},
-      
 
       {"Drive\n\nDrive forward and come back", drive_example},
       {"odom test drive", testStuff},
@@ -303,6 +306,10 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
+  pod.set(true);
+
+  middle.set(false);
+
   while (true) {
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
@@ -318,11 +325,11 @@ void opcontrol() {
 
     // . . .
 
-    if (master.get_digital(DIGITAL_R2)) {           //outtake everything
+    if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake.move(-127);
-    } else if (master.get_digital(DIGITAL_R1)) {    //intake bottom only
-      intake1.move(127);                            
-    } else if (master.get_digital(DIGITAL_L1)) {    //intake everything
+    } else if (master.get_digital(DIGITAL_R1)) {  // intake bottom only
+      intake1.move(127);
+    } else if (master.get_digital(DIGITAL_L1)) {  // intake everything
       intake.move(127);
     } else {
       intake.move(0);
@@ -332,7 +339,7 @@ void opcontrol() {
     middle.button_toggle(master.get_digital(DIGITAL_DOWN));
     matchload.button_toggle(master.get_digital(DIGITAL_A));
     pod.button_toggle(master.get_digital(DIGITAL_RIGHT));
-    
+
     // if (master.get_digital_new_press(
     //         pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L1)) {
     //   lift_up = !lift_up;
