@@ -10,10 +10,10 @@
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-13, -12, -11},  // Left Chassis Ports (negative port will reverse it!)
-    {17, 19, 18},      // Right Chassis Ports (negative port will reverse it!)
+    {-5, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
+    {21, 9, 10},   // Right Chassis Ports (negative port will reverse it!)
 
-    10,    // IMU Port
+    2,    // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -22,12 +22,12 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(11, 2, 1.35, 1);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(13, 2, 0, 1);      // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel horiz_tracker(-1, 2, 0, 1);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(-19, 2, 0.18, 1);      // This tracking wheel is parallel to the drive wheels
 
-ez::Piston descore('A');
-ez::Piston middle('B');
-ez::Piston matchload('C');
+ez::Piston tongue('A');
+ez::Piston park('B');
+ez::Piston descore('C');
 ez::Piston pod('D');
 
 // pros::Motor intake1(10, pros::v5::MotorGear::blue, pros::v5::MotorUnits::degrees);
@@ -73,45 +73,53 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
-      {"top middle goal and left long goal", topAndLeft},
-      {"clear stuff", skills},
-      
-      {"bottom middle goal and right long goal", bottomAndRight},
-      
-      {"blue solo", blueSolo},
-      {"solo wp", firstautoyay},
-      {"ride side long goal", rightSide},
-
-      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
-
-      {"pid solo", adjustedSolo},
-
-      {"use all blocks for long goal", longGoal},
-      {"score in both middle goals", middleGoals},
-
-      {"woohoo.", odometry_accuracy_test},
-      {"Turn\n\nTurn 3 times.", turn_example},
-
-      {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
-
+      {"rushes right side blocks", rushRightYay},
+      {"rush left blocks", rush},
+      {"go in a square", drive_and_turn},
+      {"Driving", driving},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
+      
 
-      {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
-      {"Turns based on angle degree measurements", angles},
+     
+      // {"top middle goal and left long goal", topAndLeft},
+      // {"clear stuff", skills},
 
-      {"Drive\n\nDrive forward and come back", drive_example},
-      {"odom test drive", testStuff},
+      // {"bottom middle goal and right long goal", bottomAndRight},
 
-      {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
-      {"Drive and Turn\n\nSlow down during drive", wait_until_change_speed},
-      {"Swing Turn\n\nSwing in an 'S' curve", swing_example},
-      {"Motion Chaining\n\nDrive forward, turn, and come back, but blend everything together :D", motion_chaining},
-      {"Combine all 3 movements", combining_movements},
-      {"Interference\n\nAfter driving forward, robot performs differently if interfered or not", interfered_example},
+      // {"blue solo", blueSolo},
+      // {"solo wp", firstautoyay},
+      // {"ride side long goal", rightSide},
 
-      {"Pure Pursuit Wait Until\n\nGo to (24, 24) but start running an intake once the robot passes (12, 24)", odom_pure_pursuit_wait_until_example},
+      // {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
 
-      {"Boomerang Pure Pursuit\n\nGo to (0, 24, 45) on the way to (24, 24) then come back to (0, 0, 0)", odom_boomerang_injected_pure_pursuit_example},
+      // {"pid solo", adjustedSolo},
+
+      // {"use all blocks for long goal", longGoal},
+      // {"score in both middle goals", middleGoals},
+
+      // {"woohoo.", odometry_accuracy_test},
+      // {"Turn\n\nTurn 3 times.", turn_example},
+
+      // {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
+
+      // 
+
+      // {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
+      // {"Turns based on angle degree measurements", angles},
+
+      // {"Drive\n\nDrive forward and come back", drive_example},
+      // {"odom test drive", testStuff},
+
+      // {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
+      // {"Drive and Turn\n\nSlow down during drive", wait_until_change_speed},
+      // {"Swing Turn\n\nSwing in an 'S' curve", swing_example},
+      // {"Motion Chaining\n\nDrive forward, turn, and come back, but blend everything together :D", motion_chaining},
+      // {"Combine all 3 movements", combining_movements},
+      // {"Interference\n\nAfter driving forward, robot performs differently if interfered or not", interfered_example},
+
+      // {"Pure Pursuit Wait Until\n\nGo to (24, 24) but start running an intake once the robot passes (12, 24)", odom_pure_pursuit_wait_until_example},
+
+      // {"Boomerang Pure Pursuit\n\nGo to (0, 24, 45) on the way to (24, 24) then come back to (0, 0, 0)", odom_boomerang_injected_pure_pursuit_example},
 
   });
 
@@ -308,7 +316,7 @@ void opcontrol() {
 
   pod.set(true);
 
-  middle.set(false);
+  
 
   while (true) {
     // Gives you some extras to make EZ-Template ezier
@@ -325,20 +333,53 @@ void opcontrol() {
 
     // . . .
 
+    // bool descoreUp = false;
+
+
+
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake.move(-127);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake bottom only
-      intake1.move(127);
-    } else if (master.get_digital(DIGITAL_L1)) {  // intake everything
       intake.move(127);
+    } else if (master.get_digital(DIGITAL_L1)) {  // intake bottom only
+      intake1.move(127);
+      intake2.move(-127);
+      intake3.move(127);
     } else {
       intake.move(0);
     }
 
+    // if (descoreUp == true) {
+    // // First press: Actuate the piston and move the intake
+    // descore.set(true);  // Actuate the piston
+    // intake.move(-30);   // Move the intake
+    // pros::delay(20);
+    // intake.move(0);  
+
+    // } else if (descoreUp == false) {
+
+    // descore.set(false);
+
+    // }
+
+    // if (master.get_digital_new_press(DIGITAL_L2)) {  
+    //   descoreUp = !descoreUp;
+      
+     
+
+    // }
+
+
+
+
+
+    
+
+    park.button_toggle(master.get_digital(DIGITAL_B));
     descore.button_toggle(master.get_digital(DIGITAL_L2));
-    middle.button_toggle(master.get_digital(DIGITAL_DOWN));
-    matchload.button_toggle(master.get_digital(DIGITAL_A));
-    pod.button_toggle(master.get_digital(DIGITAL_RIGHT));
+    // descore.button_toggle(master.get_digital(DIGITAL_L2));
+    pod.button_toggle(master.get_digital(DIGITAL_Y));
+    tongue.button_toggle(master.get_digital(DIGITAL_RIGHT));
 
     // if (master.get_digital_new_press(
     //         pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L1)) {

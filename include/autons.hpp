@@ -9,6 +9,12 @@ void odometry_accuracy_test();
 void default_constants();
 void lifted_constants();
 
+void driving();
+
+void turningTuning();
+void rush();
+void rushRightYay();
+
 void skills();
 void adjustedSolo();
 void rightSide();
