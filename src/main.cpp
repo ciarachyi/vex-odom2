@@ -13,7 +13,7 @@ ez::Drive chassis(
     {-5, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
     {21, 9, 10},   // Right Chassis Ports (negative port will reverse it!)
 
-    2,    // IMU Port
+    2,     // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -22,8 +22,8 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(-1, 2, 0, 1);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(-19, 2, 0.18, 1);      // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel horiz_tracker(-1, 2, 0, 1);     // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(-19, 2, 0.18, 1);  // This tracking wheel is parallel to the drive wheels
 
 ez::Piston tongue('A');
 ez::Piston park('B');
@@ -73,14 +73,18 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
+      {"skills", skills},
+      {"solo sig wp", SoloSig1},
       {"rushes right side blocks", rushRightYay},
+     
+      
+      {"rush fdor the left side", rushLeft},
+   
       {"rush left blocks", rush},
       {"go in a square", drive_and_turn},
       {"Driving", driving},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
-      
 
-     
       // {"top middle goal and left long goal", topAndLeft},
       // {"clear stuff", skills},
 
@@ -102,7 +106,7 @@ void initialize() {
 
       // {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
 
-      // 
+      //
 
       // {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
       // {"Turns based on angle degree measurements", angles},
@@ -315,8 +319,7 @@ void opcontrol() {
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
   pod.set(true);
-
-  
+  bool descoreUp = false;
 
   while (true) {
     // Gives you some extras to make EZ-Template ezier
@@ -333,9 +336,7 @@ void opcontrol() {
 
     // . . .
 
-    // bool descoreUp = false;
-
-
+   
 
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake.move(-127);
@@ -345,38 +346,37 @@ void opcontrol() {
       intake1.move(127);
       intake2.move(-127);
       intake3.move(127);
+    } else if (master.get_digital_new_press(DIGITAL_L2)) {
+      if (descoreUp == true) {
+        descore.set(false);
+        descoreUp = false;       
+
+      } else {
+        intake.move(-40);   // Move the intake
+        pros::delay(100);
+        descore.set(true);
+        intake.move(0);
+        descoreUp = true;
+      }
+    
     } else {
       intake.move(0);
     }
 
-    // if (descoreUp == true) {
-    // // First press: Actuate the piston and move the intake
-    // descore.set(true);  // Actuate the piston
-    // intake.move(-30);   // Move the intake
-    // pros::delay(20);
-    // intake.move(0);  
-
-    // } else if (descoreUp == false) {
-
-    // descore.set(false);
-
-    // }
-
-    // if (master.get_digital_new_press(DIGITAL_L2)) {  
-    //   descoreUp = !descoreUp;
-      
-     
-
-    // }
-
-
-
-
-
     
 
+    // if (master.get_digital_new_press(DIGITAL_L2)) {
+
+    //   intake.move(-30);   // Move the intake
+    //   pros::delay(20);
+
+    //   descore.set(true);  // Actuate the piston
+
+    //   intake.move(0);
+    // }
+
     park.button_toggle(master.get_digital(DIGITAL_B));
-    descore.button_toggle(master.get_digital(DIGITAL_L2));
+
     // descore.button_toggle(master.get_digital(DIGITAL_L2));
     pod.button_toggle(master.get_digital(DIGITAL_Y));
     tongue.button_toggle(master.get_digital(DIGITAL_RIGHT));

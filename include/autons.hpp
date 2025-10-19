@@ -14,6 +14,9 @@ void driving();
 void turningTuning();
 void rush();
 void rushRightYay();
+void rushLeft();
+void skills();
+void SoloSig1();
 
 void skills();
 void adjustedSolo();
