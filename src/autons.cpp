@@ -186,7 +186,7 @@ void skills() {
   chassis.pid_wait_quick_chain();
   // chassis.pid_turn_set(90_deg, TURN_SPEED);
   // chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set({{{-30_in, -42.5_in, -91_deg}, rev, 127}}, true);  // first long goal
+  chassis.pid_odom_set({{{-30_in, -42.75_in, -91_deg}, rev, 127}}, true);  // first long goal
 
   intake3.move(-127);
   intake2.move(-60);
@@ -280,7 +280,7 @@ void skills() {
   descore.set_value(0);
   tongue.set_value(1);
   intake.move(127);
-  chassis.pid_drive_set(17, 127, true);
+  chassis.pid_drive_set(17, 110, true);
   chassis.pid_wait_quick_chain();
   pros::delay(1100);
   chassis.pid_wait_quick_chain();
@@ -297,7 +297,7 @@ void skills() {
   chassis.pid_drive_set(8, 127, true);
   chassis.pid_wait_quick_chain();
   tongue.set_value(0);
-  chassis.pid_odom_set({{{-62_in, 18.5_in, 179_deg}, fwd, 90}}, true);  // set up in front of park
+  chassis.pid_odom_set({{{-62_in, 17.7_in, 179_deg}, fwd, 90}}, true);  // set up in front of park
   chassis.pid_wait_quick_chain();
   tongue.set_value(1);
   pod.set_value(1);
