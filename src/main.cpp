@@ -74,12 +74,18 @@ void initialize() {
   ez::as::auton_selector.autons_add({
 
       {"skills", skills},
+      {"scores 9 in the left long goal", leftNineBall},
+      {"rush for the left side", rushLeft},
       {"solo sig wp", SoloSig1},
       {"rushes right side blocks", rushRightYay},
-     
       
-      {"rush fdor the left side", rushLeft},
-   
+      
+      
+
+      
+
+      
+
       {"rush left blocks", rush},
       {"go in a square", drive_and_turn},
       {"Driving", driving},
@@ -319,6 +325,7 @@ void opcontrol() {
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
   pod.set(true);
+  descore.set(false);
   bool descoreUp = false;
 
   while (true) {
@@ -336,8 +343,6 @@ void opcontrol() {
 
     // . . .
 
-   
-
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake.move(-127);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake bottom only
@@ -346,24 +351,26 @@ void opcontrol() {
       intake1.move(127);
       intake2.move(-127);
       intake3.move(127);
+    } else if (master.get_digital(DIGITAL_DOWN)) {
+
+      intake.move(-50);
+  
     } else if (master.get_digital_new_press(DIGITAL_L2)) {
       if (descoreUp == true) {
         descore.set(false);
-        descoreUp = false;       
+        descoreUp = false;
 
       } else {
-        intake.move(-40);   // Move the intake
+        intake.move(-40);  // Move the intake
         pros::delay(100);
         descore.set(true);
         intake.move(0);
         descoreUp = true;
       }
-    
+
     } else {
       intake.move(0);
     }
-
-    
 
     // if (master.get_digital_new_press(DIGITAL_L2)) {
 

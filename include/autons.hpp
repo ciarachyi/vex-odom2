@@ -18,10 +18,12 @@ void rushLeft();
 void skills();
 void SoloSig1();
 
+// void descoreUp();
 void skills();
 void adjustedSolo();
 void rightSide();
 void blueSolo();
+void leftNineBall();
 
 void testStuff();
 void drive_example();
