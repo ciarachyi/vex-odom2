@@ -81,7 +81,7 @@ void SoloSig1() {
   chassis.odom_xyt_set(-48_in, -15_in, 180_deg);
   intake.move(127);
   tongue.set_value(1);
-  chassis.pid_drive_set(29, DRIVE_SPEED, true);
+  chassis.pid_drive_set(30.5, DRIVE_SPEED, true);
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
@@ -131,7 +131,7 @@ void SoloSig1() {
   chassis.pid_wait_quick_chain();
   // descore.set_value(0);
 
-  chassis.pid_odom_set({{{-23_in, 29_in, 0_deg}, fwd, 110}}, true);  // second blocks
+  chassis.pid_odom_set({{{-23_in, 28_in, 0_deg}, fwd, 110}}, true);  // second blocks
   chassis.pid_wait_quick_chain();
 
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
@@ -191,7 +191,7 @@ void skills() {
   chassis.pid_wait_quick_chain();
   // chassis.pid_turn_set(90_deg, TURN_SPEED);
   // chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set({{{-30_in, -42.75_in, -91_deg}, rev, 127}}, true);  // first long goal
+  chassis.pid_odom_set({{{-30_in, -43.5_in, -91_deg}, rev, 127}}, true);  // first long goal
 
   intake3.move(-127);
   intake2.move(-60);
