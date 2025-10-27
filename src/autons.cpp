@@ -88,7 +88,7 @@ void SoloSig1() {
   chassis.pid_drive_set(21.5, 100, false);
 
   chassis.pid_wait_until(10);
-  pros::delay(680);
+  pros::delay(670);
   chassis.pid_targets_reset();
 
   // chassis.pid_odom_set({{{-60.5_in, -44_in, -91_deg}, fwd, 127}}, true);
@@ -101,7 +101,7 @@ void SoloSig1() {
   // chassis.pid_wait_quick_chain();
   // chassis.pid_turn_set(90_deg, TURN_SPEED);
   // chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set({{{-29_in, -42.5_in, -91_deg}, rev, 127}}, false);  // first long goal
+  chassis.pid_odom_set({{{-30_in, -44_in, -91_deg}, rev, 127}}, false);  // first long goal
 
   intake2.move(-40);
   intake3.move(-40);
@@ -194,8 +194,8 @@ void skills() {
   chassis.pid_odom_set({{{-30_in, -43.5_in, -91_deg}, rev, 127}}, true);  // first long goal
 
   intake3.move(-127);
-  intake2.move(-60);
-  intake1.move(-60);
+  intake2.move(-127);
+  intake1.move(-127);
 
   pros::delay(10);
   chassis.pid_wait_quick_chain();
@@ -235,7 +235,7 @@ void skills() {
   chassis.pid_wait_quick_chain();
   chassis.pid_odom_set({{{34_in, -45_in, -91_deg}, rev, 90}}, true);  // second scoring of long goal
 
-  intake.move(-50);
+  intake.move(-127);
   pros::delay(10);
   chassis.pid_wait_quick_chain();
   descore.set_value(1);
@@ -259,7 +259,7 @@ void skills() {
   chassis.pid_wait_quick_chain();
   chassis.pid_odom_set({{{27_in, 49_in, 88_deg}, rev, 80}}, true);  // 3rd scoring
 
-  intake.move(-50);
+  intake.move(-127);
   pros::delay(10);
   chassis.pid_wait_quick_chain();
   descore.set_value(1);
@@ -295,7 +295,7 @@ void skills() {
   chassis.pid_wait_quick_chain();
   chassis.pid_odom_set({{{-33.5_in, 51_in, -91_deg}, rev, 90}}, true);  // last scoring
 
-  intake.move(-50);
+  intake.move(-127);
   pros::delay(10);
   chassis.pid_wait_quick_chain();
   descore.set_value(1);
@@ -311,7 +311,9 @@ void skills() {
   tongue.set_value(1);
   pod.set_value(1);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(24, 127, true);
+  chassis.pid_drive_set(-1, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(25, 127, true);
   chassis.pid_wait_quick_chain();
   tongue.set_value(0);
 
@@ -365,7 +367,7 @@ void rushRightYay() {
   tongue.set_value(1);
   chassis.pid_wait_quick_chain();
   intake.move(127);
-  chassis.pid_drive_set(18.5, 127, true);
+  chassis.pid_drive_set(18.5, 110, true);
 
   chassis.pid_wait_until(10);
   pros::delay(680);

@@ -77,6 +77,7 @@ void initialize() {
       {"solo sig wp", SoloSig1},
       {"skills", skills},
       
+
       
       
       
