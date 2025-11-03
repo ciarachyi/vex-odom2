@@ -73,25 +73,13 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
+      {"skills", skills},
       {"rushes right side blocks", rushRightYay},
       {"solo sig wp", SoloSig1},
-      {"skills", skills},
-      
-
-      
       
       
       {"scores 9 in the left long goal", leftNineBall},
       {"rush for the left side", rushLeft},
-      
-      
-      
-      
-      
-
-      
-
-      
 
       {"rush left blocks", rush},
       {"go in a square", drive_and_turn},
@@ -368,8 +356,8 @@ void opcontrol() {
         descoreUp = false;
 
       } else {
-        intake.move(-40);  // Move the intake
-        pros::delay(100);
+        intake.move(-127);  // Move the intake
+        pros::delay(160);
         descore.set(true);
         intake.move(0);
         descoreUp = true;
