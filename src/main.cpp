@@ -73,10 +73,11 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
+      {"rushes right side blocks", rushRightYay},
       {"rush for the left side", rushLeft},
       {"solo sig wp", SoloSig1},
       {"skills", skills},
-      {"rushes right side blocks", rushRightYay},
+      
      
       
       
