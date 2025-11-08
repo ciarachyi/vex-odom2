@@ -73,13 +73,15 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
+      {"rush for the left side", rushLeft},
+      {"solo sig wp", SoloSig1},
       {"skills", skills},
       {"rushes right side blocks", rushRightYay},
-      {"solo sig wp", SoloSig1},
+     
       
       
       {"scores 9 in the left long goal", leftNineBall},
-      {"rush for the left side", rushLeft},
+      
 
       {"rush left blocks", rush},
       {"go in a square", drive_and_turn},
@@ -241,6 +243,40 @@ void ez_screen_task() {
   }
 }
 pros::Task ezScreenTask(ez_screen_task);
+
+// void motor_temp() {
+//   while (true) {
+//     // Only run this when not connected to a competition switch
+//     if (!pros::competition::is_connected()) {
+//       // Blank page for odom debugging
+//         // If we're on the first blank page...
+//         if (ez::as::page_blank_is_on(3)) {
+//           // Display X, Y, and Theta
+//           ez::screen_print("Left 1: " + util::to_string_with_precision(double pros::Motor::get_temperature ( )) +
+//                                  "\n Left 2: " + util::to_string_with_precision(chassis.odom_y_get()) +
+//                                  "\n Left 3: " + util::to_string_with_precision(chassis.odom_y_get()) +
+//                                  "\n Right 1: " + util::to_string_with_precision(chassis.odom_y_get()) +
+//                                  "\n Right 2: " + util::to_string_with_precision(chassis.odom_y_get()) +
+//                                  "\n Right 3: " + util::to_string_with_precision(chassis.odom_theta_get()),
+//                            1);  // Don't override the top Page line
+
+//           // Display all trackers that are being used
+
+//         }
+//       }
+    
+
+//     // Remove all blank pages when connected to a comp switch
+//     else {
+//       if (ez::as::page_blank_amount() > 0)
+//         ez::as::page_blank_remove_all();
+//     }
+
+//     pros::delay(ez::util::DELAY_TIME);
+//   }
+// }
+
+// pros::Task motorTemp(motor_temp);
 /**
  * Gives you some extras to run in your opcontrol:
  * - run your autonomous routine in opcontrol by pressing DOWN and B
