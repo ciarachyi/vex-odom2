@@ -77,13 +77,8 @@ void initialize() {
       {"rushes right side blocks", rushRightYay},
       {"rush for the left side", rushLeft},
       {"solo sig wp", SoloSig1},
-    
-      
-     
-      
-      
+
       {"scores 9 in the left long goal", leftNineBall},
-      
 
       {"rush left blocks", rush},
       {"go in a square", drive_and_turn},
@@ -213,6 +208,7 @@ void screen_print_tracker(ez::tracking_wheel *tracker, std::string name, int lin
  * and will help you debug problems you're having
  */
 void ez_screen_task() {
+  pros::Motor motor(9);
   while (true) {
     // Only run this when not connected to a competition switch
     if (!pros::competition::is_connected()) {
@@ -223,7 +219,8 @@ void ez_screen_task() {
           // Display X, Y, and Theta
           ez::screen_print("x: " + util::to_string_with_precision(chassis.odom_x_get()) +
                                "\ny: " + util::to_string_with_precision(chassis.odom_y_get()) +
-                               "\na: " + util::to_string_with_precision(chassis.odom_theta_get()),
+                               "\na: " + util::to_string_with_precision(chassis.odom_theta_get()) +
+                               "\ntemp: " + util::to_string_with_precision(motor.get_temperature()),
                            1);  // Don't override the top Page line
 
           // Display all trackers that are being used
@@ -246,6 +243,32 @@ void ez_screen_task() {
 }
 pros::Task ezScreenTask(ez_screen_task);
 
+// void number_test() {
+//    while (true) {
+//     // Only run this when not connected to a competition switch
+//     if (!pros::competition::is_connected()) {
+//       // Blank page for odom debugging
+//       if (chassis.odom_enabled() && !chassis.pid_tuner_enabled()) {
+//         // If we're on the first blank page...
+//         if (ez::as::page_blank_is_on(0)) {
+//           // Display X, Y, and Theta
+//           ez::screen_print("2 ",
+//                            1);  // Don't override the top Page line
+//         }
+//       }
+//     }
+
+//     // Remove all blank pages when connected to a comp switch
+//     else {
+//       if (ez::as::page_blank_amount() > 0)
+//         ez::as::page_blank_remove_all();
+//     }
+
+//     pros::delay(ez::util::DELAY_TIME);
+//   }
+// }
+// pros::Task numberTest(ez_screen_task);
+
 // void motor_temp() {
 //   while (true) {
 //     // Only run this when not connected to a competition switch
@@ -266,7 +289,6 @@ pros::Task ezScreenTask(ez_screen_task);
 
 //         }
 //       }
-    
 
 //     // Remove all blank pages when connected to a comp switch
 //     else {
@@ -385,9 +407,8 @@ void opcontrol() {
       intake2.move(-127);
       intake3.move(127);
     } else if (master.get_digital(DIGITAL_DOWN)) {
-
       intake.move(-50);
-  
+
     } else if (master.get_digital_new_press(DIGITAL_L2)) {
       if (descoreUp == true) {
         descore.set(false);
