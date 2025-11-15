@@ -6,10 +6,10 @@
 extern Drive chassis;
 // extern pros::adi::DigitalOut middle;
 
-inline pros::MotorGroup intake({8, -3, -4});
+inline pros::MotorGroup intake({8, -2, -4});
 
 inline pros::Motor intake1(8);  //bottom
-inline pros::Motor intake2(-3);  //top
+inline pros::Motor intake2(-2);  //top
 inline pros::Motor intake3(-4);  //yay
 
 // inline pros::MotorGroup intake ({17, 10});

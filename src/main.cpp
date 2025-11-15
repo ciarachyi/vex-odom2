@@ -13,7 +13,7 @@ ez::Drive chassis(
     {-5, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
     {21, 9, 10},   // Right Chassis Ports (negative port will reverse it!)
 
-    2,     // IMU Port
+    3,     // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -23,7 +23,7 @@ ez::Drive chassis(
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
 ez::tracking_wheel horiz_tracker(-19, 2, 0, 1);     // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(-1, 2, 0.18, 1);  // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel vert_tracker(-18, 2, 0.18, 1);  // This tracking wheel is parallel to the drive wheels
 
 ez::Piston tongue('A');
 ez::Piston park('B');
@@ -74,8 +74,9 @@ void initialize() {
   ez::as::auton_selector.autons_add({
 
 
-      {"rush for the left side", rushLeft},
       {"skills", skills},
+      {"rush for the left side", rushLeft},
+      
       
       {"rushes right side blocks", rushRightYay},
       
