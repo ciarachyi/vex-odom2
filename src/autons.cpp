@@ -16,7 +16,7 @@ extern pros::adi::DigitalOut pod;
 
 // These are out of 127
 const int DRIVE_SPEED = 127;
-const int TURN_SPEED = 90;
+const int TURN_SPEED = 127;
 const int SWING_SPEED = 110;
 // Was slew the issue??
 ///
@@ -59,12 +59,39 @@ void default_constants() {
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there **EXPERIMENT WITH THIS MAYBE
 }
 
+void drive_and_turn() {
+  default_constants();
+  chassis.pid_drive_set(17_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_drive_set(17_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_drive_set(17_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_drive_set(17_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(0_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+}
+
 
 void driving() {
   default_constants();
   chassis.pid_drive_set(48, 127, true);
   chassis.pid_wait();
-  pros::delay(500);
+  // pros::delay(500);
   chassis.pid_drive_set(48, 127, true);
   chassis.pid_wait();
   chassis.pid_drive_set(-96, 127, true);
@@ -745,32 +772,6 @@ void firstautoyay() {
 // ///
 // // Combining Turn + Drive
 // ///
-void drive_and_turn() {
-  default_constants();
-  chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(180_deg, TURN_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(-90_deg, TURN_SPEED);
-  chassis.pid_wait();
-
-  chassis.pid_drive_set(24_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-
-  chassis.pid_turn_set(0_deg, TURN_SPEED);
-  chassis.pid_wait();
-}
 
 // ///
 // // Wait Until and Changing Max Speed

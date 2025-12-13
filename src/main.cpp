@@ -76,6 +76,7 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
+      {"go in a square", drive_and_turn},
       {"Driving", driving},
       {"rushes right side blocks", rushRightYay},
       {"skills", skills},
@@ -88,7 +89,7 @@ void initialize() {
       {"scores 9 in the left long goal", leftNineBall},
 
       // {"rush left blocks", rush},
-      {"go in a square", drive_and_turn},
+      
       
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
 
