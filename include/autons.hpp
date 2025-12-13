@@ -9,6 +9,8 @@ void odometry_accuracy_test();
 void default_constants();
 void lifted_constants();
 
+void distanceTest();
+
 void driving();
 
 void turningTuning();

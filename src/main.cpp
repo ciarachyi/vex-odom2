@@ -10,10 +10,10 @@
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-5, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
-    {21, 9, 10},   // Right Chassis Ports (negative port will reverse it!)
+    {-10, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
+    {20, 9, 8},   // Right Chassis Ports (negative port will reverse it!)
 
-    3,     // IMU Port
+    19,     // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -22,13 +22,16 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(-19, 2, 0, 1);    // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(-18, 2, 0.18, 1);  // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel horiz_tracker(18, 2, 3.32, 1);    // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(-11, 2, 0.36, 1);  // This tracking wheel is parallel to the drive wheels
 
-ez::Piston tongue('A');
-ez::Piston park('B');
-ez::Piston descore('C');
-ez::Piston pod('D');
+ez::Piston tongue('D');
+ez::Piston park('A');
+ez::Piston descore('B');
+ez::Piston pod('E');
+ez::Piston pistintake('C');
+
+       //BE CAREFUL OF THIS
 
 // pros::Motor intake1(10, pros::v5::MotorGear::blue, pros::v5::MotorUnits::degrees);
 // pros::Motor intake2(10, pros::v5::MotorGear::blue, pros::v5::MotorUnits::degrees);
@@ -73,6 +76,7 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
+      {"Driving", driving},
       {"rushes right side blocks", rushRightYay},
       {"skills", skills},
       {"solo sig wp", SoloSig1},
@@ -83,9 +87,9 @@ void initialize() {
 
       {"scores 9 in the left long goal", leftNineBall},
 
-      {"rush left blocks", rush},
+      // {"rush left blocks", rush},
       {"go in a square", drive_and_turn},
-      {"Driving", driving},
+      
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
 
       // {"top middle goal and left long goal", topAndLeft},
@@ -383,12 +387,16 @@ void opcontrol() {
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
 
   pod.set(true);
+  // pistintake.set(true);
   descore.set(false);
   bool descoreUp = false;
 
   while (true) {
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
+
+
+    
 
     // chassis.opcontrol_tank();  // Tank control
     chassis.opcontrol_arcade_standard(ez::SPLIT);  // Standard split arcade
@@ -401,15 +409,18 @@ void opcontrol() {
 
     // . . .
 
+    //  printf("Distance: %d mm\n", rightDistance.get());
+    //             pros::delay(20);
+
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake.move(-127);
-    } else if (master.get_digital(DIGITAL_R1)) {  // intake bottom only
+    } else if (master.get_digital(DIGITAL_R1)) {  // intake 
       intake.move(127);
-    } else if (master.get_digital(DIGITAL_L1)) {  // intake bottom only
-      intake1.move(127);
-      intake2.move(-127);
-      intake3.move(127);
-    } else if (master.get_digital(DIGITAL_DOWN)) {
+    } else if (master.get_digital(DIGITAL_L1)) {  // middle
+      intake1.move(60);
+      intake2.move(-30);
+      intake3.move(60);
+    } else if (master.get_digital(DIGITAL_B)) {
       intake.move(-50);
 
     } else if (master.get_digital_new_press(DIGITAL_L2)) {
@@ -439,11 +450,12 @@ void opcontrol() {
     //   intake.move(0);
     // }
 
-    park.button_toggle(master.get_digital(DIGITAL_B));
+    park.button_toggle(master.get_digital(DIGITAL_Y));
 
-    // descore.button_toggle(master.get_digital(DIGITAL_L2));
-    pod.button_toggle(master.get_digital(DIGITAL_Y));
+
     tongue.button_toggle(master.get_digital(DIGITAL_RIGHT));
+    pod.button_toggle(master.get_digital(DIGITAL_A));
+    pistintake.button_toggle(master.get_digital(DIGITAL_DOWN));
 
     // if (master.get_digital_new_press(
     //         pros::controller_digital_e_t::E_CONTROLLER_DIGITAL_L1)) {
