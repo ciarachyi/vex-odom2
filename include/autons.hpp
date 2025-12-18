@@ -9,7 +9,10 @@ void odometry_accuracy_test();
 void default_constants();
 void lifted_constants();
 
+void what();
+void driveBack();
 void distanceTest();
+void control();
 
 void driving();
 

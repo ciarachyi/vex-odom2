@@ -76,9 +76,30 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
-      {"go in a square", drive_and_turn},
-      {"Driving", driving},
+      {"gets long goal control, right side, 7 blocks", control},
+
+      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+      
+      {"basic test", what},
+      
+    
+
+      
+     
+      
+      {"yay", driveBack},
+      
       {"rushes right side blocks", rushRightYay},
+      
+      
+      {"Driving", driving},
+      
+     
+      
+      
+      {"go in a square", drive_and_turn},
+      
+      
       {"skills", skills},
       {"solo sig wp", SoloSig1},
       
@@ -178,8 +199,13 @@ void autonomous() {
   chassis.pid_targets_reset();                // Resets PID targets to 0
   chassis.drive_imu_reset();                  // Reset gyro position to 0
   chassis.drive_sensor_reset();               // Reset drive sensors to 0
+
   chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
+
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
+
+
+  
 
   /*
   Odometry and Pure Pursuit are not magic
@@ -195,6 +221,9 @@ void autonomous() {
   */
 
   ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
+  // printf("Gyro: %f \n", chassis.drive_imu_get());
+
+
 }
 
 /**

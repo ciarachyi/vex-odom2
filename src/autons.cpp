@@ -26,18 +26,18 @@ const int SWING_SPEED = 110;
 
 void default_constants() {
   // P, I, D, and Start I
-  chassis.pid_drive_constants_set(10.5, 0.9, 96.0);           // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_drive_constants_set(10.5, 0.9, 96.0);          // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(15.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
-  chassis.pid_turn_constants_set(3, 0.05, 20, 15.0);         // Turn in place constants
+  chassis.pid_turn_constants_set(2, 0.05, 22, 15.0);         // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
-  chassis.pid_odom_angular_constants_set(6.5, 0.0, 55);      // Angular control for odom motions
-  chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
+  chassis.pid_odom_angular_constants_set(6.5, 0.2, 75);      // Angular control for odom motions
+  chassis.pid_odom_boomerang_constants_set(6, 0.6, 58);  // Angular control for boomerang motions
 
   // Exit conditions
   chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
   chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 350_ms, 350_ms);
-  chassis.pid_odom_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 750_ms);
+  chassis.pid_odom_turn_exit_condition_set(90_ms, 4_deg, 250_ms, 7_deg, 500_ms, 750_ms);
   chassis.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms);
   chassis.pid_turn_chain_constant_set(3_deg);
   chassis.pid_swing_chain_constant_set(5_deg);
@@ -52,12 +52,84 @@ void default_constants() {
   // - if you have tracking wheels, you can run this higher.  1.0 is the max
   chassis.odom_turn_bias_set(0.7);
 
-  chassis.odom_look_ahead_set(4_in);           // This is how far ahead in the path the robot looks at
+  chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
   chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
-  chassis.odom_boomerang_dlead_set(0.4);       // This handles how aggressive the end of boomerang motions are **TRY THIS
+  chassis.odom_boomerang_dlead_set(0.625);       // This handles how aggressive the end of boomerang motions are **TRY THIS
 
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there **EXPERIMENT WITH THIS MAYBE
 }
+
+void what(){
+
+  default_constants();
+  chassis.odom_xy_set(12, 12);
+  chassis.drive_angle_set(45_deg);
+  chassis.pid_odom_set({{{36_in, 36_in, 45_deg}, fwd, 127}}, false);
+
+
+
+
+
+}
+
+void driveBack(){
+
+  default_constants();
+  chassis.pid_odom_set({{{0_in, -24_in, 0_deg}, rev, 127}}, false);
+
+}
+
+//printf("Odometry: X: %.2f, Y: %.2f, Theta: %.2f\n", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
+
+void control(){
+
+  default_constants();
+
+  chassis.odom_xy_set(-50, -12);
+  chassis.drive_angle_set(115_deg);
+
+  // intake.move(127);
+  // descore.set_value(1);
+  chassis.pid_odom_set({{{-20_in, -24_in, 125_deg}, fwd, 127}}, false);
+
+  // pros::delay(500);
+  // tongue.set_value(1);
+
+
+
+
+
+
+
+  
+
+}
+
+void odom_drive_example() {
+  // This works the same as pid_drive_set, but it uses odom instead!
+  // You can replace pid_drive_set with pid_odom_set and your robot will
+  // have better error correction.
+
+  // default_constants();
+
+  chassis.odom_xyt_set(0_in, 0_in, -45_deg);
+  // pod.set_value(1);
+  chassis.pid_odom_set({{{0_in, 51_in, 0_deg}, fwd, DRIVE_SPEED}}, false);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_odom_set({{{51_in, 51_in, 90_deg}, fwd, DRIVE_SPEED}}, false);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_odom_set({{{51_in, 0_in, 180_deg}, fwd, DRIVE_SPEED}}, false);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_odom_set({{{0_in, 0_in, 270_deg}, fwd, DRIVE_SPEED}}, false);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_turn_set(-45_deg, TURN_SPEED);
+
+}
+
 
 void drive_and_turn() {
   default_constants();
@@ -85,7 +157,6 @@ void drive_and_turn() {
   chassis.pid_turn_set(0_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
 }
-
 
 void driving() {
   default_constants();
@@ -632,8 +703,6 @@ void rushLeft() {
   // tongue.set_value(0);
 }
 
-
-
 void firstautoyay() {
   default_constants();
   chassis.odom_xyt_set(-52_in, -13_in, 146_deg);
@@ -685,24 +754,6 @@ void firstautoyay() {
 //   chassis.pid_wait();
 // }
 
-// void odom_drive_example() {
-//   // This works the same as pid_drive_set, but it uses odom instead!
-//   // You can replace pid_drive_set with pid_odom_set and your robot will
-//   // have better error correction.
-
-//   // default_constants();
-
-//   chassis.odom_xyt_set(0_in, 0_in, 0_deg);
-
-//   chassis.pid_odom_set({{{0_in, 12_in, 0_deg}, fwd, DRIVE_SPEED}}, true);
-//   chassis.pid_wait();
-
-//   chassis.pid_odom_set({{{0_in, 6_in, 0_deg}, rev, DRIVE_SPEED}}, true);
-//   chassis.pid_wait();
-
-//   chassis.pid_odom_set({{{0_in, 0_in, 0_deg}, rev, DRIVE_SPEED}}, true);
-//   chassis.pid_wait();
-// }
 
 // //***faulty rotation sensor???
 // void odom_boomerang_example() {
