@@ -26,11 +26,11 @@ const int SWING_SPEED = 110;
 
 void default_constants() {
   // P, I, D, and Start I
-  chassis.pid_drive_constants_set(10.5, 0.9, 96.0);          // Fwd/rev constants, used for odom and non odom motions
-  chassis.pid_heading_constants_set(15.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
-  chassis.pid_turn_constants_set(2, 0.05, 22, 15.0);         // Turn in place constants
-  chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
-  chassis.pid_odom_angular_constants_set(6.5, 0.2, 75);      // Angular control for odom motions
+  chassis.pid_drive_constants_set(10.5, 0.9, 96.0);      // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_heading_constants_set(15.0, 0.0, 20.0);    // Holds the robot straight while going forward without odom
+  chassis.pid_turn_constants_set(2, 0.05, 22, 15.0);     // Turn in place constants
+  chassis.pid_swing_constants_set(6.0, 0.0, 65.0);       // Swing constants
+  chassis.pid_odom_angular_constants_set(6.5, 0.2, 75);  // Angular control for odom motions
   chassis.pid_odom_boomerang_constants_set(6, 0.6, 58);  // Angular control for boomerang motions
 
   // Exit conditions
@@ -54,54 +54,54 @@ void default_constants() {
 
   chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
   chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
-  chassis.odom_boomerang_dlead_set(0.625);       // This handles how aggressive the end of boomerang motions are **TRY THIS
+  chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are **TRY THIS
 
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there **EXPERIMENT WITH THIS MAYBE
 }
 
-void what(){
-
+void what() {
   default_constants();
   chassis.odom_xy_set(12, 12);
   chassis.drive_angle_set(45_deg);
   chassis.pid_odom_set({{{36_in, 36_in, 45_deg}, fwd, 127}}, false);
-
-
-
-
-
 }
 
-void driveBack(){
-
+void driveBack() {
   default_constants();
   chassis.pid_odom_set({{{0_in, -24_in, 0_deg}, rev, 127}}, false);
-
 }
 
-//printf("Odometry: X: %.2f, Y: %.2f, Theta: %.2f\n", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
+// printf("Odometry: X: %.2f, Y: %.2f, Theta: %.2f\n", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 
-void control(){
+void control() {
 
   default_constants();
 
   chassis.odom_xy_set(-50, -12);
   chassis.drive_angle_set(115_deg);
 
-  // intake.move(127);
-  // descore.set_value(1);
-  chassis.pid_odom_set({{{-20_in, -24_in, 125_deg}, fwd, 127}}, false);
+  intake.move(127);
+  descore.set_value(1);
+  chassis.pid_odom_set({{{-16_in, -27_in, 125_deg}, fwd, 127}}, false);
 
-  // pros::delay(500);
-  // tongue.set_value(1);
+  pros::delay(600);
+  tongue.set_value(1);
+  pros::delay(180);
 
-
-
-
-
-
-
-  
+  chassis.pid_turn_set(225_deg, TURN_SPEED);
+  pros::delay(390);
+  chassis.pid_odom_set({{{-58_in, -46.5_in, 265_deg}, fwd, 127}}, false);
+  pros::delay(1200);
+  chassis.pid_drive_set(15.5_in, 70, true);
+  pros::delay(1400);
+  chassis.pid_drive_set(-27_in, DRIVE_SPEED, true);
+  chassis.pid_wait_quick_chain();
+  // chassis.pid_odom_set({{{-48_in, -48_in, 270_deg}, rev, 127}}, false);
+  descore.set_value(0);
+  pros::delay(1500);
+  chassis.pid_drive_set(12_in, 127, true);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_odom_set({{{-31_in, -43_in, 265_deg}, rev, 127}}, false);
 
 }
 
@@ -127,9 +127,7 @@ void odom_drive_example() {
   chassis.pid_wait_quick_chain();
 
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
-
 }
-
 
 void drive_and_turn() {
   default_constants();
@@ -753,7 +751,6 @@ void firstautoyay() {
 //                        true);
 //   chassis.pid_wait();
 // }
-
 
 // //***faulty rotation sensor???
 // void odom_boomerang_example() {
