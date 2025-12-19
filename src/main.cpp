@@ -76,9 +76,14 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
 
+
+      {"9 ball 2 control left", troy},
+      {"solo sig wp", SoloSigWP},
       {"gets long goal control, right side, 7 blocks", control},
 
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+     
+      
       
       {"basic test", what},
       
@@ -101,7 +106,7 @@ void initialize() {
       
       
       {"skills", skills},
-      {"solo sig wp", SoloSig1},
+      {"solo wp for regional events", soloR},
       
       
 

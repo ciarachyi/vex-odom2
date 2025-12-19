@@ -9,19 +9,23 @@ void odometry_accuracy_test();
 void default_constants();
 void lifted_constants();
 
+
+
 void what();
 void driveBack();
 void distanceTest();
 void control();
+void SoloSigWP();
 
 void driving();
+void troy();
 
 void turningTuning();
 void rush();
 void rushRightYay();
 void rushLeft();
 void skills();
-void SoloSig1();
+void soloR();
 
 // void descoreUp();
 void skills();

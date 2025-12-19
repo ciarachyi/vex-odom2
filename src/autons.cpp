@@ -73,6 +73,106 @@ void driveBack() {
 
 // printf("Odometry: X: %.2f, Y: %.2f, Theta: %.2f\n", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 
+void troy(){
+
+  default_constants();
+  chassis.odom_xy_set(-50, 12);
+  chassis.drive_angle_set(45_deg);
+
+
+
+}
+
+
+void SoloSigWP(){
+
+
+  default_constants();
+  chassis.odom_xy_set(-48_in, -12_in);
+  chassis.drive_angle_set(180_deg);
+  descore.set_value(1);
+  intake.move(127);
+  tongue.set_value(1);
+  chassis.pid_drive_set(30, 127, true);
+  pros::delay(500);
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  pros::delay(500);
+  chassis.pid_drive_set(17.8, 40, false);
+
+  chassis.pid_wait_until(10);
+  pros::delay(360);
+  chassis.pid_targets_reset();
+
+  chassis.pid_odom_set({{{-31_in, -44.5_in, -90_deg}, rev, 127}}, true);  // first long goal
+  pros::delay(700);
+  chassis.pid_drive_set(-19, 127, true);
+  pros::delay(300);
+  descore.set_value(0);
+  pros::delay(1200);
+  tongue.set_value(0);
+  chassis.pid_turn_set(0_deg, TURN_SPEED);
+ 
+  pros::delay(600);
+  descore.set_value(1);
+  chassis.pid_odom_set({{{-25_in, -12_in, 0_deg}, fwd, 127}}, true);  
+  pros::delay(600);
+
+  tongue.set_value(1);
+  pros::delay(250);
+  tongue.set_value(0);
+  chassis.pid_drive_set(31, 127, true);
+  pros::delay(700);
+  chassis.pid_odom_set({{{-25_in, 28_in, 0_deg}, fwd, 127}}, true); 
+  // chassis.pid_drive_set(39, 127, true);
+  pros::delay(650);
+  tongue.set_value(1);
+
+  pros::delay(500);
+
+  chassis.pid_turn_set(-55_deg, TURN_SPEED);
+  pros::delay(400);
+
+  chassis.pid_odom_set({{{-13_in, 13.5_in}, rev, 127}}, false); 
+  // tongue.set_value(1);
+  pros::delay(450);
+  intake.move(-127);
+
+  pros::delay(400);
+  intake1.move(60);
+  intake2.move(-50);
+  intake3.move(60);
+  pros::delay(700);
+  intake.move(0);
+
+  chassis.pid_drive_set(34, 127, true);
+  pros::delay(700);
+  intake.move(127);
+  chassis.pid_odom_set({{{-63_in, 49_in, -90_deg}, fwd, 127}}, true); 
+  pros::delay(1000);
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  pros::delay(100);
+  chassis.pid_drive_set(14, 50, false);
+
+  chassis.pid_wait_until(8);
+  pros::delay(470);
+  chassis.pid_targets_reset();
+  chassis.pid_odom_set({{{-30_in, 50.5_in, -90_deg}, rev, 127}}, true); 
+
+  pros::delay(600);
+  chassis.pid_drive_set(-16, 127, false);
+  pros::delay(100);
+  descore.set_value(0);
+  pros::delay(1200);
+  chassis.pid_drive_set(6, 127, true);
+
+
+ 
+
+
+
+}
+
+
 void control() {
 
   default_constants();
@@ -90,20 +190,49 @@ void control() {
 
   chassis.pid_turn_set(225_deg, TURN_SPEED);
   pros::delay(390);
-  chassis.pid_odom_set({{{-58_in, -46.5_in, 265_deg}, fwd, 127}}, false);
-  pros::delay(1200);
-  chassis.pid_drive_set(15.5_in, 70, true);
+  chassis.pid_odom_set({{{-58_in, -47_in, 246_deg}, fwd, 127}}, false);
+
   pros::delay(1400);
-  chassis.pid_drive_set(-27_in, DRIVE_SPEED, true);
-  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(200);
+  chassis.pid_drive_set(13_in, 127, false);
+  chassis.pid_wait_until(5);
+  pros::delay(100);
+  chassis.pid_targets_reset();
+
+
+
+  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(750);
+
+  chassis.pid_odom_set({{{-22_in, -48_in, 270_deg}, rev, 127}}, false);
+  pros::delay(800);
+  chassis.pid_drive_set(-10_in, DRIVE_SPEED, true);
+  intake.move(-100);
+  pros::delay(500);
+  // chassis.pid_wait_quick_chain();
+  intake.move(127);
   // chassis.pid_odom_set({{{-48_in, -48_in, 270_deg}, rev, 127}}, false);
   descore.set_value(0);
   pros::delay(1500);
-  chassis.pid_drive_set(12_in, 127, true);
-  chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set({{{-31_in, -43_in, 265_deg}, rev, 127}}, false);
+  chassis.pid_drive_set(13_in, 127, true);
+  intake.move(-127);
+  tongue.set_value(0);
+
+  pros::delay(400);
+  chassis.pid_turn_set(225_deg, TURN_SPEED);
+  pros::delay(450);
+
+  chassis.pid_odom_set({{{-21_in, -36.8_in}, rev, DRIVE_SPEED}}, false);
+  pros::delay(700);
+  chassis.pid_turn_set(272_deg, TURN_SPEED);
+
+  pros::delay(500);
+  chassis.pid_drive_set(-20_in, 40, true);
 
 }
+
 
 void odom_drive_example() {
   // This works the same as pid_drive_set, but it uses odom instead!
@@ -174,7 +303,7 @@ void driving() {
 //   rightDistance.get();
 // }
 
-void SoloSig1() {
+void soloR() {
   default_constants();
   chassis.odom_xyt_set(-48_in, -15_in, 180_deg);
   intake.move(127);
