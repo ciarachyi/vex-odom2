@@ -11,9 +11,9 @@
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
     {-10, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
-    {20, 9, 8},   // Right Chassis Ports (negative port will reverse it!)
+    {20, 9, 8},     // Right Chassis Ports (negative port will reverse it!)
 
-    19,     // IMU Port
+    19,    // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -22,7 +22,7 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(18, 2, 3.32, 1);    // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel horiz_tracker(18, 2, 3.32, 1);  // This tracking wheel is perpendicular to the drive wheels
 ez::tracking_wheel vert_tracker(-11, 2, 0.36, 1);  // This tracking wheel is parallel to the drive wheels
 
 ez::Piston tongue('D');
@@ -31,7 +31,10 @@ ez::Piston descore('B');
 ez::Piston pod('E');
 ez::Piston pistintake('C');
 
-       //BE CAREFUL OF THIS
+pros::Distance frontDistance(15);
+pros::Distance leftDistance(1);
+
+// BE CAREFUL OF THIS
 
 // pros::Motor intake1(10, pros::v5::MotorGear::blue, pros::v5::MotorUnits::degrees);
 // pros::Motor intake2(10, pros::v5::MotorGear::blue, pros::v5::MotorUnits::degrees);
@@ -77,46 +80,36 @@ void initialize() {
   ez::as::auton_selector.autons_add({
 
 
+      {"manifesting 100 pts", skillsWR},
+      {"testing the distance reset", practiceDistance},
+
+     
       {"9 ball 2 control left", troy},
       {"solo sig wp", SoloSigWP},
+
       {"gets long goal control, right side, 7 blocks", control},
 
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
-     
-      
-      
-      {"basic test", what},
-      
-    
 
-      
-     
-      
+      {"basic test", what},
+
       {"yay", driveBack},
-      
+
       {"rushes right side blocks", rushRightYay},
-      
-      
+
       {"Driving", driving},
-      
-     
-      
-      
+
       {"go in a square", drive_and_turn},
-      
-      
+
       {"skills", skills},
       {"solo wp for regional events", soloR},
-      
-      
 
       {"rush for the left side", rushLeft},
 
       {"scores 9 in the left long goal", leftNineBall},
 
       // {"rush left blocks", rush},
-      
-      
+
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
 
       // {"top middle goal and left long goal", topAndLeft},
@@ -201,16 +194,13 @@ void competition_initialize() {
  * from where it left off.
  */
 void autonomous() {
-  chassis.pid_targets_reset();                // Resets PID targets to 0
-  chassis.drive_imu_reset();                  // Reset gyro position to 0
-  chassis.drive_sensor_reset();               // Reset drive sensors to 0
+  chassis.pid_targets_reset();   // Resets PID targets to 0
+  chassis.drive_imu_reset();     // Reset gyro position to 0
+  chassis.drive_sensor_reset();  // Reset drive sensors to 0
 
-  chassis.odom_xyt_set(0_in, 0_in, 0_deg);    // Set the current position, you can start at a specific position with this
+  chassis.odom_xyt_set(0_in, 0_in, 0_deg);  // Set the current position, you can start at a specific position with this
 
   chassis.drive_brake_set(MOTOR_BRAKE_HOLD);  // Set motors to hold.  This helps autonomous consistency
-
-
-  
 
   /*
   Odometry and Pure Pursuit are not magic
@@ -227,8 +217,6 @@ void autonomous() {
 
   ez::as::auton_selector.selected_auton_call();  // Calls selected auton from autonomous selector
   // printf("Gyro: %f \n", chassis.drive_imu_get());
-
-
 }
 
 /**
@@ -252,27 +240,36 @@ void screen_print_tracker(ez::tracking_wheel *tracker, std::string name, int lin
 void ez_screen_task() {
   pros::Motor motor(9);
   while (true) {
-    // Only run this when not connected to a competition switch
-    if (!pros::competition::is_connected()) {
-      // Blank page for odom debugging
-      if (chassis.odom_enabled() && !chassis.pid_tuner_enabled()) {
-        // If we're on the first blank page...
-        if (ez::as::page_blank_is_on(0)) {
-          // Display X, Y, and Theta
-          ez::screen_print("x: " + util::to_string_with_precision(chassis.odom_x_get()) +
-                               "\ny: " + util::to_string_with_precision(chassis.odom_y_get()) +
-                               "\na: " + util::to_string_with_precision(chassis.odom_theta_get()) +
-                               "\ntemp: " + util::to_string_with_precision(motor.get_temperature()),
-                           1);  // Don't override the top Page line
+    // string odom_enabled = chassis.odom_enabled() ? "true" : "false";
+    // string tuner_enabled = chassis.pid_tuner_enabled() ? "true" : "false";
+    // string competition_connected = pros::competition::is_connected() ? "true" : "false";
+    // ez::screen_print("Hi2 is odom enabled:" + odom_enabled + ", tuner enabled:" + tuner_enabled + ", competition connected:" + competition_connected);
 
-          // Display all trackers that are being used
-          screen_print_tracker(chassis.odom_tracker_left, "l", 4);
-          screen_print_tracker(chassis.odom_tracker_right, "r", 5);
-          screen_print_tracker(chassis.odom_tracker_back, "b", 6);
-          screen_print_tracker(chassis.odom_tracker_front, "f", 7);
-        }
+    // Only run this when not connected to a competition switch
+
+    // TODO: Comment below back in -- disabled for now to debug distance sensor during auton
+    // if (!pros::competition::is_connected())
+
+    // Blank page for odom debugging
+    if (chassis.odom_enabled() && !chassis.pid_tuner_enabled()) {
+      // If we're on the first blank page...
+      if (ez::as::page_blank_is_on(0)) {
+        // Display X, Y, and Theta
+        ez::screen_print("x: " + util::to_string_with_precision(chassis.odom_x_get()) +
+                             "\ny: " + util::to_string_with_precision(chassis.odom_y_get()) +
+                             "\na: " + util::to_string_with_precision(chassis.odom_theta_get()) +
+                             "\ntemp: " + util::to_string_with_precision(motor.get_temperature()),
+                         1);  // Don't override the top Page line
+
+        // Display all trackers that are being used
+        screen_print_tracker(chassis.odom_tracker_left, "l", 4);
+        screen_print_tracker(chassis.odom_tracker_right, "r", 5);
+        screen_print_tracker(chassis.odom_tracker_back, "b", 6);
+        screen_print_tracker(chassis.odom_tracker_front, "f", 7);
       }
     }
+    // TODO: Comment below back in per comment above associated with if
+    // }
 
     // Remove all blank pages when connected to a comp switch
     else {
@@ -430,9 +427,6 @@ void opcontrol() {
     // Gives you some extras to make EZ-Template ezier
     ez_template_extras();
 
-
-    
-
     // chassis.opcontrol_tank();  // Tank control
     chassis.opcontrol_arcade_standard(ez::SPLIT);  // Standard split arcade
     // chassis.opcontrol_arcade_standard(ez::SINGLE);  // Standard single arcade
@@ -449,7 +443,7 @@ void opcontrol() {
 
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake.move(-127);
-    } else if (master.get_digital(DIGITAL_R1)) {  // intake 
+    } else if (master.get_digital(DIGITAL_R1)) {  // intake
       intake.move(127);
     } else if (master.get_digital(DIGITAL_L1)) {  // middle
       intake1.move(60);
@@ -486,7 +480,6 @@ void opcontrol() {
     // }
 
     park.button_toggle(master.get_digital(DIGITAL_Y));
-
 
     tongue.button_toggle(master.get_digital(DIGITAL_RIGHT));
     pod.button_toggle(master.get_digital(DIGITAL_A));

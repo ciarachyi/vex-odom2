@@ -17,8 +17,11 @@ void distanceTest();
 void control();
 void SoloSigWP();
 
+
+void practiceDistance();
 void driving();
 void troy();
+void skillsWR();
 
 void turningTuning();
 void rush();
