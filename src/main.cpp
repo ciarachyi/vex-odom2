@@ -78,18 +78,21 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-
-
+    
+      {"9 ball 2 control left", troy},
       {"manifesting 100 pts", skillsWR},
+      {"solo sig wp", SoloSigWP},
+      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+     
+     
       {"testing the distance reset", practiceDistance},
 
-     
-      {"9 ball 2 control left", troy},
-      {"solo sig wp", SoloSigWP},
+      
+      
 
       {"gets long goal control, right side, 7 blocks", control},
 
-      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+      
 
       {"basic test", what},
 
@@ -450,21 +453,18 @@ void opcontrol() {
       intake2.move(-30);
       intake3.move(60);
     } else if (master.get_digital(DIGITAL_B)) {
-      intake.move(-50);
-
-    } else if (master.get_digital_new_press(DIGITAL_L2)) {
-      if (descoreUp == true) {
-        descore.set(false);
-        descoreUp = false;
-
-      } else {
-        intake.move(-127);  // Move the intake
-        pros::delay(160);
-        descore.set(true);
-        intake.move(0);
-        descoreUp = true;
-      }
-
+      intake.move(-70);
+    // } else if (master.get_digital_new_press(DIGITAL_L2)) {
+      //   if (descoreUp == true) {
+    //     descore.set(false);
+    //     descoreUp = false;
+      // } else {
+      //   intake.move(-127);  // Move the intake
+      //   pros::delay(160);
+      //   descore.set(true);
+      //   intake.move(0);
+      //   descoreUp = true;
+      // }
     } else {
       intake.move(0);
     }
