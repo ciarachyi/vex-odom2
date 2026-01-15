@@ -455,16 +455,16 @@ void opcontrol() {
     } else if (master.get_digital(DIGITAL_B)) {
       intake.move(-70);
     // } else if (master.get_digital_new_press(DIGITAL_L2)) {
-      //   if (descoreUp == true) {
+    //     if (descoreUp == true) {
     //     descore.set(false);
     //     descoreUp = false;
-      // } else {
-      //   intake.move(-127);  // Move the intake
-      //   pros::delay(160);
-      //   descore.set(true);
-      //   intake.move(0);
-      //   descoreUp = true;
-      // }
+    //   } else {
+    //     intake.move(-127);  // Move the intake
+    //     pros::delay(160);
+    //     descore.set(true);
+    //     intake.move(0);
+    //     descoreUp = true;
+    //   }
     } else {
       intake.move(0);
     }
@@ -480,6 +480,7 @@ void opcontrol() {
     // }
 
     park.button_toggle(master.get_digital(DIGITAL_Y));
+    descore.button_toggle(master.get_digital(DIGITAL_L2));
 
     tongue.button_toggle(master.get_digital(DIGITAL_RIGHT));
     pod.button_toggle(master.get_digital(DIGITAL_A));
