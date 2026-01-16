@@ -21,7 +21,7 @@ extern pros::Distance leftDistance;
 // These are out of 127
 const int DRIVE_SPEED = 127;
 const int TURN_SPEED = 127;
-const int SWING_SPEED = 110;
+const int SWING_SPEED = 127;
 // Was slew the issue??
 ///
 // Constants
@@ -309,21 +309,24 @@ void troy() {
   chassis.pid_odom_set({{{-15_in, 27_in, 50_deg}, fwd, 127}}, true);
   pros::delay(900);
   tongue.set_value(1);
-  chassis.pid_odom_set({{{4_in, 50_in, 55_deg}, fwd, 127}}, true);
+  chassis.pid_odom_set({{{3_in, 50_in, 65_deg}, fwd, 127}}, true);
   pros::delay(400);
   tongue.set_value(0);
-  pros::delay(1700);
+  pros::delay(1500);
   // tongue.set_value(1);
   // pros::delay(800);
-  chassis.pid_odom_set({{{-22_in, 33_in}, rev, 127}}, true);
-  pros::delay(1400);
+  chassis.pid_odom_set({{{-23_in, 32_in}, rev, 127}}, true);
+  pros::delay(1000);
   chassis.pid_turn_set(178_deg, TURN_SPEED);
-  pros::delay(600);
+  pros::delay(450);
 
-  chassis.pid_drive_set(-8, 127, true);
+  chassis.pid_drive_set(-9.6, 127, true);
   // pros::delay(800);
-  chassis.pid_wait_quick_chain();
-  chassis.pid_swing_set(ez::RIGHT_SWING, -87_deg, 127);
+  pros::delay(750);
+  // chassis.pid_swing_set(ez::RIGHT_SWING, -87_deg, 127);
+  chassis.pid_swing_set(ez::RIGHT_SWING, -87, 127, 7);
+
+
 
   // chassis.pid_odom_set({{{-24_in, 32_in}, fwd, 127}}, true);
   // chassis.pid_odom_set({{{-16_in, 43.5_in}, rev, 127}}, true);
@@ -336,7 +339,7 @@ void troy() {
   // chassis.pid_drive_set(-8, 127, true);
 
   // chassis.pid_odom_set({{{-32_in, 26_in}, rev, 127}}, true);
-  pros::delay(700);
+  pros::delay(750);
   // chassis.pid_odom_set({{{-34_in, 48_in, -90_deg}, rev, 127}}, true);
   // pros::delay(2100);
   // chassis.pid_odom_set({{{-26_in, 48_in, -90_deg}, rev, 127}}, true);
@@ -344,55 +347,65 @@ void troy() {
   // chassis.pid_drive_set(-8, 127, true);
   // pros::delay(500);
 
+  // chassis.pid_turn_set(-87_deg, TURN_SPEED);
+ 
   descore.set_value(0);
   intake2.move(127);
   intake3.move(-127);
   intake1.move(-127);
+  // chassis.pid_drive_set(-4, 127, false);
   pros::delay(150);
   intake.move(127);
-  pros::delay(1300);
+  pros::delay(1200);
   tongue.set_value(1);
-  chassis.pid_odom_set({{{-48_in, 44_in}, fwd, 127}}, true);
-  descore.set_value(1);
+  chassis.pid_odom_set({{{-48_in, 42_in}, fwd, 127}}, true);    //match load
+  
 
-  pros::delay(800);
+  pros::delay(650);
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
 
-  pros::delay(300);
+  pros::delay(150);
+  descore.set_value(1);
+  chassis.pid_drive_set(17_in, 70, false);
+  
 
-  chassis.pid_drive_set(15, 80, false);
-
-  chassis.pid_wait_until(9);
-  pros::delay(460);
+  chassis.pid_wait_until(14.7_in);
+  pros::delay(100);
   chassis.pid_drive_set(-6, 127, false);
-  pros::delay(600);
+  pros::delay(380);
   // chassis.pid_odom_set({{{-27_in, 47_in, -90_deg}, rev, 127}}, true);
-  chassis.pid_odom_set({{{4.2_in, 6.8_in, -45_deg}, rev, 127}}, true);  // mid goal
+  chassis.pid_odom_set({{{3.5_in, 6.3_in, -45_deg}, rev, 127}}, true);  // mid goal
 
-  pros::delay(1500);
+  pros::delay(1100);
+  intake.move(-127);
+  pros::delay(300);
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
   // pros::delay(500);
 
-  intake.move(-127);
+  
 
-  pros::delay(300);
+  // pros::delay(300);
 
   intake1.move(60);
   intake2.move(-50);
   intake3.move(60);
   tongue.set_value(0);
-  pros::delay(1500);
-  chassis.pid_odom_set({{{-22_in, 41_in}, fwd, 127}}, true);
-  pros::delay(2200);
-  chassis.pid_drive_set(6, 127, true);
-  pros::delay(500);
-  chassis.pid_turn_set(87_deg, TURN_SPEED);
+  pros::delay(1400);
+  chassis.pid_drive_set(30, 127, true);
+  chassis.pid_wait_until(26_in);
+  chassis.pid_odom_set({{{-28_in, 39_in}, fwd, 127}}, true);    //push
+  pros::delay(750);
+  // chassis.pid_turn_set(84_deg, TURN_SPEED);
+  // pros::delay(700);
+  // chassis.pid_drive_set(6, 127, false);
+  // pros::delay(300);
+  chassis.pid_turn_set(85_deg, TURN_SPEED);
 
   descore.set_value(0);
-  pros::delay(500);
-  chassis.pid_drive_set(26, 90, true);
+  pros::delay(550);
+  chassis.pid_drive_set(26, 100, true);
   // chassis.pid_wait_until(33);
-  chassis.pid_wait_quick_chain();
+  pros::delay(1000);
   chassis.pid_turn_set(115_deg, TURN_SPEED);
 
   // pros::delay(700);
