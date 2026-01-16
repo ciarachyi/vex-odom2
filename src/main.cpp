@@ -79,6 +79,7 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
     
+      {"gets long goal control, right side, 7 blocks", control},
       {"9 ball 2 control left", troy},
       {"manifesting 100 pts", skillsWR},
       {"solo sig wp", SoloSigWP},
@@ -90,7 +91,7 @@ void initialize() {
       
       
 
-      {"gets long goal control, right side, 7 blocks", control},
+      
 
       
 
