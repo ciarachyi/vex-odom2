@@ -12,6 +12,7 @@ void lifted_constants();
 
 
 
+void RightTroy();
 void what();
 void driveBack();
 void distanceTest();
