@@ -13,7 +13,7 @@ ez::Drive chassis(
     {-10, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
     {20, 9, 8},     // Right Chassis Ports (negative port will reverse it!)
 
-    19,    // IMU Port
+    12,    // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -79,10 +79,14 @@ void initialize() {
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
     
-      {"9 ball 2 control right", RightTroy},
-      {"gets long goal control, right side, 7 blocks", control},
-      {"9 ball 2 control left", troy},
       {"manifesting 100 pts", skillsWR},
+      {"gets long goal control, right side, 7 blocks", control},
+      
+      {"gets long goal control, left side, 7 blocks", LeftControl},
+      {"9 ball 2 control right", RightTroy},
+      
+      {"9 ball 2 control left", troy},
+      
       {"solo sig wp", SoloSigWP},
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
      
@@ -422,6 +426,8 @@ void ez_template_extras() {
 void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
+  intake2.set_brake_mode(MOTOR_BRAKE_COAST);
+ 
 
   pod.set(true);
   // pistintake.set(true);
@@ -448,6 +454,8 @@ void opcontrol() {
 
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake.move(-127);
+      // intake3.move(-127);
+      // intake2.move(5);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake
       intake.move(127);
     } else if (master.get_digital(DIGITAL_L1)) {  // middle

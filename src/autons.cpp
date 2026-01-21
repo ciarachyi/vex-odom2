@@ -100,138 +100,152 @@ void heading() {
 
 void skillsWR() {
   default_constants();
-  // chassis.odom_xy_set(-50, 12);
-  // chassis.drive_angle_set(65_deg);
+  chassis.odom_xy_set(-50, 12);
+  chassis.drive_angle_set(65_deg);
 
-  // descore.set_value(1);
-  // intake.move(127);
-  // // chassis.pid_drive_set(26_in, 90, true);
+  descore.set_value(1);
+  intake.move(127);
+  // chassis.pid_drive_set(26_in, 90, true);
 
-  // chassis.pid_odom_set({{{-9_in, 24_in, 75_deg}, fwd, 127}}, true);
-  // pros::delay(1900);
+  chassis.pid_odom_set({{{-9_in, 24_in, 75_deg}, fwd, 127}}, true);
+  pros::delay(1900);
 
-  // chassis.pid_turn_set(-45_deg, TURN_SPEED);
-  // pros::delay(900);
+  chassis.pid_turn_set(-45_deg, TURN_SPEED);
+  pros::delay(900);
 
-  // // chassis.pid_drive_set(-12_in, 127, true);
+  // chassis.pid_drive_set(-12_in, 127, true);
 
-  // chassis.pid_odom_set({{{-6.5_in, 13.5_in}, rev, 127}}, true);
+  chassis.pid_odom_set({{{-5_in, 12_in}, rev, 127}}, true);
 
-  // pros::delay(900);
+  pros::delay(900);
 
-  // chassis.pid_turn_set(-45_deg, TURN_SPEED);
+  chassis.pid_turn_set(-45_deg, TURN_SPEED);
 
-  // intake.move(-127);
+  intake.move(-127);
 
-  // pros::delay(200);
+  pros::delay(200);
 
-  // intake1.move(60);
-  // intake2.move(-30);
-  // intake3.move(60);
+  intake1.move(60);
+  intake2.move(-30);
+  intake3.move(60);
 
-  // pros::delay(950);
+  pros::delay(850);
 
-  // intake.move(0);  // finished middle scoring
+  intake.move(0);  // finished middle scoring
 
-  // chassis.pid_drive_set(26, 127, true);
+  chassis.pid_drive_set(26, 127, true);
 
-  // pros::delay(600);
-  // chassis.pid_odom_set({{{-54_in, 43.5_in, -90_deg}, fwd, 127}}, true);
-  // pros::delay(1000);
-  // chassis.pid_turn_set(-90_deg, TURN_SPEED);
-  // pros::delay(500);
-  // tongue.set_value(1);
+  pros::delay(600);
+  chassis.pid_odom_set({{{-54_in, 42.5_in, -90_deg}, fwd, 127}}, true);
+  pros::delay(800);
+  tongue.set_value(1);
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  pros::delay(200);
+  
 
-  // intake.move(127);
-  // chassis.pid_drive_set(15.8, 50, false);  // match load #1
+  intake.move(127);
+  chassis.pid_drive_set(18, 50, false);  // match load #1
 
-  // chassis.pid_wait_until(13);
-  // pros::delay(1600);
-  // // chassis.pid_targets_reset();
+  chassis.pid_wait_until(16);
+  pros::delay(1600);
+  // chassis.pid_targets_reset();
 
-  // chassis.pid_drive_set(-8, 127, true);
+  chassis.pid_drive_set(-8, 127, true);
+
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_odom_set({{{-24_in, 59.5_in}, rev, 127}}, true);
+
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(-92.5_deg, TURN_SPEED);
+  pros::delay(700);
+  tongue.set_value(0);
+  intake.move(0);
+  chassis.pid_drive_set(-75, 127, false);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(45_deg, TURN_SPEED);
+  pros::delay(350);
+  chassis.pid_drive_set(-12, 127, false);
+  pros::delay(500);
+
+  // chassis.pid_wait_until(-52);
+  // chassis.pid_odom_set({{{44_in, 52.5_in}, rev, 127}}, false);
 
   // chassis.pid_wait_quick_chain();
-
-  // chassis.pid_odom_set({{{-24_in, 59.5_in}, rev, 127}}, true);
-
-  // chassis.pid_wait_quick_chain();
-  // chassis.pid_turn_set(-92.5_deg, TURN_SPEED);
-  // pros::delay(700);
-  // tongue.set_value(0);
-  // intake.move(0);
-  // chassis.pid_drive_set(-75, 127, false);
-  // chassis.pid_wait_quick_chain();
-  // chassis.pid_turn_set(45_deg, TURN_SPEED);
-  // chassis.pid_wait_quick_chain();
-  // chassis.pid_drive_set(-12, 127, false);
-  // chassis.pid_wait_quick_chain();
-
-  // // chassis.pid_wait_until(-52);
-  // // chassis.pid_odom_set({{{44_in, 52.5_in}, rev, 127}}, false);
-
-  // // chassis.pid_wait_quick_chain();
-  // // chassis.pid_turn_set(90_deg, TURN_SPEED);
-  // // pros::delay(700);
-
-  // chassis.pid_odom_set({{{24_in, 52_in, 90_deg}, rev, 80}}, false); //first scoring
-  // pros::delay(2000);
   // chassis.pid_turn_set(90_deg, TURN_SPEED);
-
-  // // pros::delay(900);
-  // // chassis.pid_drive_set(-23.5, 127, false);  // first scoring
-  // pros::delay(500);
-  // chassis.pid_drive_set(-8, 127, false);
   // pros::delay(700);
-  // intake2.move(127);
-  // intake1.move(-127);
-  // intake3.move(-127);
 
-  // pros::delay(200);
+  chassis.pid_odom_set({{{24_in, 52_in, 90_deg}, rev, 80}}, false); //first scoring
+  pros::delay(1800);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
 
-  // descore.set_value(0);
+  
+  pros::delay(500);
+  chassis.pid_drive_set(-8, 127, false);
+  pros::delay(700);
 
-  // // chassis.odom_xy_set(29, 55);
-  // // chassis.drive_angle_set(90_deg);
+  intake2.move(127);
+  intake1.move(-127);
+  intake3.move(-127);
 
-  // intake.move(127);
+  pros::delay(150);
 
-  // pros::delay(2000);
-  // tongue.set_value(1);
-  // chassis.pid_odom_set({{{50_in, 55_in, 89_deg}, fwd, 127}}, true);  // match load #2
-  // pros::delay(1000);
-  // descore.set_value(1);
+  descore.set_value(0);
 
-  // pros::delay(200);
-  // chassis.pid_turn_set(90_deg, TURN_SPEED);
-  // chassis.pid_drive_set(19, 50, false);
-
-  // chassis.pid_wait_until(15);
-  // pros::delay(1500);
-
-  // chassis.pid_drive_set(-9, 127, true);
-  // chassis.pid_wait_quick_chain();
-
-  // chassis.pid_odom_set({{{30_in, 52_in, 90_deg}, rev, 127}}, true);  // second scoring
-  // pros::delay(1500);
-
-  // chassis.pid_drive_set(-14, 127, false);
-  // pros::delay(700);
-  // intake.move(-127);
-
-  // pros::delay(100);
-  // descore.set_value(0);
+  // chassis.odom_xy_set(29, 55);
+  // chassis.drive_angle_set(90_deg);
 
   intake.move(127);
 
-  chassis.odom_xy_set(30.8, 48);
-  chassis.drive_angle_set(90_deg);
+  pros::delay(2000);
+  tongue.set_value(1);
+  chassis.pid_odom_set({{{50_in, 53.8_in, 89_deg}, fwd, 127}}, true);  // match load #2
+  pros::delay(1000);
+  descore.set_value(1);
 
-  // pros::delay(1400);
+  pros::delay(200);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_drive_set(25.7, 60, false);
+
+  chassis.pid_wait_until(21.7);
+  pros::delay(1500);
+
+  chassis.pid_drive_set(-9, 127, true);
+  chassis.pid_wait_quick_chain();
+
+  chassis.pid_odom_set({{{30_in, 52_in, 90_deg}, rev, 127}}, true);  // second scoring
+  pros::delay(1500);
+
+  chassis.pid_drive_set(-14, 127, false);
+  pros::delay(700);
+  intake.move(-127);
+
+  pros::delay(100);
+  descore.set_value(0);
+
+  intake.move(127);      //maybe this was important????
+
+  // chassis.odom_xy_set(30.8, 48);
+  // chassis.drive_angle_set(90_deg);
+
+  pros::delay(1400);
+
+
+
+
+
+
+
+
+
+
+
+
+  descore.set_value(1);
   tongue.set_value(0);
   chassis.pid_odom_set({
-                           {{47_in, 43_in}, fwd, 127},
-                           {{68.5_in, 26_in, 178_deg}, fwd, 127},
+                           {{48_in, 50_in}, fwd, 127},
+                           {{71_in, 26_in, 178_deg}, fwd, 127},
                        },  // park
                        true);
 
@@ -246,7 +260,7 @@ void skillsWR() {
   pod.set_value(1);
   descore.set_value(1);
   pros::delay(20);
-  chassis.pid_drive_set(90_in, 90, false);
+  chassis.pid_drive_set(100_in, 90, false);
   chassis.pid_wait_quick_chain();
 
   chassis.odom_y_set(-68 + frontDistance.get() / 25.4);
@@ -256,7 +270,7 @@ void skillsWR() {
   chassis.pid_odom_set({{{68_in, -38_in}, fwd, 127}}, true);
   chassis.pid_wait_quick_chain();
   pod.set_value(0);
-  chassis.pid_odom_set({{{19.5_in, -17_in}, rev, 127}}, true);
+  chassis.pid_odom_set({{{17.5_in, -15_in}, rev, 127}}, true);
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(132_deg, TURN_SPEED);
 
@@ -286,12 +300,32 @@ void skillsWR() {
   // chassis.pid_targets_reset();
 
   chassis.pid_drive_set(-8, 127, true);
-  pros::delay(800);
-  chassis.pid_odom_set({{{28_in, -39_in, 90_deg}, rev, 127}}, true);
-  chassis.pid_wait_quick_chain();
-  descore.set_value(0);
 
-  // chassis.pid_turn_set(-135_deg, TURN_SPEED);
+
+
+  pros::delay(800);
+  
+
+  // chassis.pid_odom_set({{{28_in, -39_in, 90_deg}, rev, 127}}, true);
+  // chassis.pid_wait_quick_chain();
+  // descore.set_value(0);
+
+  // chassis.pid_drive_set(-48, 127, true);
+
+
+
+
+
+  // chassis.odom_xy_set(28, -39);
+  // chassis.drive_angle_set(90_deg);
+
+
+
+
+
+}
+
+        // chassis.pid_turn_set(-135_deg, TURN_SPEED);
 
   // chassis.pid_odom_set({{{-26_in, 44_in, -90_deg}, rev, 127}}, true);
   // descore.set_value(0);
@@ -302,7 +336,7 @@ void skillsWR() {
 
   // chassis.odom_y_set(-72 + frontDistance.get() / 25.4);
   // chassis.odom_x_set(72 - leftDistance.get() / 25.4);
-}
+  
 
 void practiceDistance() {
   default_constants();
@@ -334,6 +368,64 @@ void driveBack() {
 
 // printf("Odometry: X: %.2f, Y: %.2f, Theta: %.2f\n", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 
+void LeftControl(){
+
+  default_constants();
+
+  chassis.odom_xy_set(-50, 12);
+  chassis.drive_angle_set(65_deg);
+
+  intake.move(127);
+  descore.set_value(1);
+  chassis.pid_odom_set({{{-12_in, 27_in, 55_deg}, fwd, 127}}, false);
+
+  pros::delay(600);
+  tongue.set_value(1);
+  pros::delay(180);
+
+  chassis.pid_turn_set(-45_deg, TURN_SPEED);
+  pros::delay(390);
+  chassis.pid_odom_set({{{-58_in, 47_in, -66_deg}, fwd, 127}}, false);
+
+  pros::delay(1400);
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(200);
+  chassis.pid_drive_set(15_in, 127, false);
+  chassis.pid_wait_until(5);
+  pros::delay(90);
+  chassis.pid_targets_reset();
+
+  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(750);
+
+  chassis.pid_odom_set({{{-22_in, 45_in, 270_deg}, rev, 127}}, false);
+  pros::delay(750);
+  chassis.pid_drive_set(-15_in, DRIVE_SPEED, true);
+  intake.move(-100);
+  pros::delay(150);
+  // chassis.pid_wait_quick_chain();
+  intake.move(127);
+  // chassis.pid_odom_set({{{-48_in, -48_in, 270_deg}, rev, 127}}, false);
+  descore.set_value(0);
+  pros::delay(1500);
+  chassis.pid_drive_set(18_in, 127, true);
+  intake.move(-127);
+  tongue.set_value(0);
+
+  pros::delay(400);
+  chassis.pid_turn_set(-135_deg, TURN_SPEED);
+  pros::delay(450);
+
+  chassis.pid_odom_set({{{-21_in, 61_in}, rev, DRIVE_SPEED}}, false);
+  pros::delay(700);
+  chassis.pid_turn_set(268_deg, TURN_SPEED);
+
+  pros::delay(300);
+  chassis.pid_drive_set(-20_in, 127, true);
+
+}
+
 void RightTroy() {
   default_constants();
   chassis.odom_xy_set(-50, -12);
@@ -345,10 +437,10 @@ void RightTroy() {
   pros::delay(650);
   tongue.set_value(1);
   pros::delay(250);
-  chassis.pid_odom_set({{{-6_in, -52.5_in, 165_deg}, fwd, 127}}, true);
+  chassis.pid_odom_set({{{-6.5_in, -52.5_in, 165_deg}, fwd, 127}}, true);
   pros::delay(400);
   tongue.set_value(0);
-  pros::delay(1500);
+  pros::delay(1400);
  
   chassis.pid_odom_set({{{-24.8_in, -34.5_in}, rev, 127}}, true);
   pros::delay(1000);
@@ -356,9 +448,9 @@ void RightTroy() {
   pros::delay(450);
 
   heading();
-  chassis.pid_drive_set(-9.6, 127, true);
+  chassis.pid_drive_set(-10.5, 127, true);
 
-  pros::delay(900);     //GO BACK TO 700
+  pros::delay(750);     //GO BACK TO 700
   default_constants();
   pros::delay(10);
   chassis.pid_swing_set(ez::LEFT_SWING, -92, 127, 7);
@@ -374,16 +466,16 @@ void RightTroy() {
   intake.move(127);
   pros::delay(1200);
   tongue.set_value(1);
-  chassis.pid_odom_set({{{-48_in, -44_in}, fwd, 127}}, true);    //match load
+  chassis.pid_odom_set({{{-48_in, -46.5_in}, fwd, 127}}, true);    //match load
   
 
-  pros::delay(650);
+  pros::delay(700);
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
 
   pros::delay(150);
   descore.set_value(1);
-  chassis.pid_drive_set(19.5_in, 70, false);
-  pros::delay(1300);
+  chassis.pid_drive_set(19.5_in, 50, false);
+  pros::delay(1200);
 
   
   chassis.pid_drive_set(-10, 127, false);
@@ -394,7 +486,10 @@ void RightTroy() {
   tongue.set_value(0);
   // chassis.pid_drive_set(40, 127, false);
   // chassis.pid_wait_until(38_in);
-  chassis.pid_odom_set({{{-8_in, -15_in, 45_deg}, fwd, 127}}, true); //mid goal
+  chassis.pid_odom_set({{{-8_in, -16.5_in, 55_deg}, fwd, 127}}, true); //mid goal
+  intake1.move(127);
+  intake3.move(-127);
+  intake2.move(-127);
  
 
   pros::delay(1500);
@@ -405,29 +500,33 @@ void RightTroy() {
   // pros::delay(200);
   // intake.move(0);
   chassis.pid_turn_set(45_deg, TURN_SPEED);
-  pros::delay(300);
+  pros::delay(150);
+  intake.move(-100);
+  pros::delay(150);
   chassis.pid_drive_set(6_in, 127, false);
-  pros::delay(300);
+  // pros::delay(100);
 
   // chassis.pid_drive_set(-3.5_in, 127, false);
   // pros::delay(100);
   
-  intake.move(-100);
+  
   tongue.set_value(0);
-  pros::delay(1400);
+  pros::delay(950);
   chassis.pid_drive_set(-30, 127, true);
   chassis.pid_wait_until(-26_in);
+  descore.set_value(0);
   chassis.pid_odom_set({{{-29_in, -40_in}, rev, 127}}, true);    //push
-  pros::delay(700);
+  pros::delay(350);
+
   
   chassis.pid_turn_set(-88_deg, TURN_SPEED);
 
   descore.set_value(0);
-  pros::delay(500);
-  chassis.pid_drive_set(-18, 127, true);
+  pros::delay(400);
+  chassis.pid_drive_set(-24, 127, true);
   
-  pros::delay(750);
-  chassis.pid_turn_set(-115_deg, TURN_SPEED);
+  // pros::delay(750);
+  // chassis.pid_turn_set(-115_deg, TURN_SPEED);
 
 }
 
