@@ -184,7 +184,7 @@ void skillsWR() {
   chassis.pid_drive_set(26, 127, true);
 
   pros::delay(600);
-  chassis.pid_odom_set({{{-54_in, 43_in, -90_deg}, fwd, 127}}, true);
+  chassis.pid_odom_set({{{-54_in, 43.5_in, -90_deg}, fwd, 127}}, true);
   tongue.set_value(1);
   pros::delay(800);
   
@@ -201,16 +201,20 @@ void skillsWR() {
 
   chassis.pid_drive_set(-8, 127, true);
 
-  chassis.pid_wait_quick_chain();
+  pros::delay(550);
+  chassis.pid_turn_set(-135_deg, TURN_SPEED);
+  pros::delay(200);
+  chassis.pid_drive_set(-23, 127, true);
+ 
 
-  chassis.pid_odom_set({{{-24_in, 61_in}, rev, 127}}, true);
+  // chassis.pid_odom_set({{{-24_in, 61_in}, rev, 127}}, true);
 
-  pros::delay(2100);
+  pros::delay(900);
   chassis.pid_turn_set(-92.5_deg, TURN_SPEED);
-  pros::delay(400);
+  pros::delay(300);
   tongue.set_value(0);
   intake.move(0);
-  chassis.pid_drive_set(-75, 127, false);
+  chassis.pid_drive_set(-77, 127, false);
   pros::delay(1800);
   chassis.pid_turn_set(45_deg, TURN_SPEED);
   pros::delay(350);
@@ -231,7 +235,7 @@ void skillsWR() {
   
   pros::delay(200);
   chassis.pid_drive_set(-8, 127, false);
-  pros::delay(300);
+  pros::delay(500);
 
   intake2.move(127);
   intake1.move(-127);

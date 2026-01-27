@@ -457,15 +457,15 @@ void opcontrol() {
     //             pros::delay(20);
 
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
-      intake.move(-127);
-      // intake3.move(-127);
-      // intake2.move(5);
+      intake1.move(-127);
+      intake3.move(-127);
+      intake2.move(-80);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake
       intake.move(127);
     } else if (master.get_digital(DIGITAL_L1)) {  // middle
       intake1.move(60);
       intake2.move(-30);
-      intake3.move(60);
+      intake3.move(50);
     } else if (master.get_digital(DIGITAL_B)) {
       intake.move(-70);
     // } else if (master.get_digital_new_press(DIGITAL_L2)) {
