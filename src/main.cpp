@@ -13,7 +13,7 @@ ez::Drive chassis(
     {-10, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
     {20, 9, 8},     // Right Chassis Ports (negative port will reverse it!)
 
-    12,    // IMU Port
+    17,    // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -459,7 +459,7 @@ void opcontrol() {
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake1.move(-127);
       intake3.move(-127);
-      intake2.move(-80);
+      intake2.move(-60);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake
       intake.move(127);
     } else if (master.get_digital(DIGITAL_L1)) {  // middle
