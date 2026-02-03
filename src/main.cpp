@@ -80,13 +80,17 @@ void initialize() {
   ez::as::auton_selector.autons_add({
     
       {"9 ball 2 control right", RightTroy},
-      {"manifesting 100 pts", skillsWR},
-     
+      {"r2 manifesting 100 pts", skillsWR},
       {"solo sig wp", SoloSigWP},
+      {"gets long goal control, right side, 7 blocks", control},
+      
+      
+     
+     
       
       {"gets long goal control, left side, 7 blocks", LeftControl},
       {"9 ball 2 control left", troy},
-      {"gets long goal control, right side, 7 blocks", control},
+      
       
       
      
