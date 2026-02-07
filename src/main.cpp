@@ -77,45 +77,32 @@ void initialize() {
   // chassis.opcontrol_curve_buttons_right_set(pros::E_CONTROLLER_DIGITAL_Y, pros::E_CONTROLLER_DIGITAL_A);
 
   // Autonomous Selector using LLEMU
+  // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
-    
+
       {"9 ball 2 control right", RightTroy},
-      {"r2 manifesting 100 pts", skillsWR},
       {"solo sig wp", SoloSigWP},
+      
+     
       {"gets long goal control, right side, 7 blocks", control},
-      
-      
-     
-     
-      
-      {"gets long goal control, left side, 7 blocks", LeftControl},
-      {"9 ball 2 control left", troy},
-      
-      
-      
-     
-      
-      {"testing the macro", whoo},
-      
-      
-      
-      
-      
-      
-      
-      
-      
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+      {"Driving", square},
+      
+      {"Driving", driving},
      
      
+      {"gets long goal control, right side, 7 blocks", control},
+      {"gets long goal control, left side, 7 blocks", LeftControl},
+
+      
+      {"r5 manifesting 100 pts", skillsWR},
+      {"9 ball 2 control left", troy},
+
+      {"testing the macro", whoo},
+
+      
+
       {"testing the distance reset", practiceDistance},
-
-      
-      
-
-      
-
-      
 
       {"basic test", what},
 
@@ -123,7 +110,7 @@ void initialize() {
 
       {"rushes right side blocks", rushRightYay},
 
-      {"Driving", driving},
+     
 
       {"go in a square", drive_and_turn},
 
@@ -444,7 +431,6 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
   intake2.set_brake_mode(MOTOR_BRAKE_COAST);
- 
 
   pod.set(true);
   // pistintake.set(true);
@@ -476,22 +462,22 @@ void opcontrol() {
     } else if (master.get_digital(DIGITAL_R1)) {  // intake
       intake.move(127);
     } else if (master.get_digital(DIGITAL_L1)) {  // middle
-      intake1.move(60);
-      intake2.move(-30);
-      intake3.move(50);
+      intake1.move(127);
+      intake2.move(-127);
+      intake3.move(127);
     } else if (master.get_digital(DIGITAL_B)) {
       intake.move(-70);
-    // } else if (master.get_digital_new_press(DIGITAL_L2)) {
-    //     if (descoreUp == true) {
-    //     descore.set(false);
-    //     descoreUp = false;
-    //   } else {
-    //     intake.move(-127);  // Move the intake
-    //     pros::delay(160);
-    //     descore.set(true);
-    //     intake.move(0);
-    //     descoreUp = true;
-    //   }
+      // } else if (master.get_digital_new_press(DIGITAL_L2)) {
+      //     if (descoreUp == true) {
+      //     descore.set(false);
+      //     descoreUp = false;
+      //   } else {
+      //     intake.move(-127);  // Move the intake
+      //     pros::delay(160);
+      //     descore.set(true);
+      //     intake.move(0);
+      //     descoreUp = true;
+      //   }
     } else {
       intake.move(0);
     }
