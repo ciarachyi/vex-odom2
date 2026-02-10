@@ -178,7 +178,12 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
+ 
 void disabled() {
+
+  // pros::delay(50);
+  // park.set(true);
+
   // . . .
 }
 
@@ -434,6 +439,7 @@ void opcontrol() {
 
   pod.set(true);
   // pistintake.set(true);
+
   descore.set(false);
   bool descoreUp = false;
 

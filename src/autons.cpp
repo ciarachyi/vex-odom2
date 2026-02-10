@@ -609,7 +609,7 @@ void RightTroy() {
   tongue.set_value(0);
   pros::delay(1550);
 
-  chassis.pid_odom_set({{{-23_in, -34.5_in}, rev, 127}}, true);
+  chassis.pid_odom_set({{{-23.5_in, -34.5_in}, rev, 127}}, true);
   pros::delay(1250);
   chassis.pid_turn_set(2_deg, TURN_SPEED);
   pros::delay(450);
@@ -620,7 +620,7 @@ void RightTroy() {
   pros::delay(700);  // GO BACK TO 700
   default_constants();
   pros::delay(10);
-  chassis.pid_swing_set(ez::LEFT_SWING, -92, 127, 7);
+  chassis.pid_swing_set(ez::LEFT_SWING, -92, 127, 17);
 
   pros::delay(750);
 
