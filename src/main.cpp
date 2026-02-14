@@ -58,7 +58,9 @@ void initialize() {
   // Look at your horizontal tracking wheel and decide if it's in front of the midline of your robot or behind it
   //  - change `back` to `front` if the tracking wheel is in front of the midline
   //  - ignore this if you aren't using a horizontal tracker
+
   chassis.odom_tracker_front_set(&horiz_tracker);
+
   // Look at your vertical tracking wheel and decide if it's to the left or right of the center of the robot
   //  - change `left` to `right` if the tracking wheel is to the right of the centerline
   //  - ignore this if you aren't using a vertical tracker
@@ -80,12 +82,16 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
+      {"r5 manifesting 100 pts", skillsWR},
+      {"arc test", odom_boomerang_injected_pure_pursuit_example},
+      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+     
       {"9 ball 2 control right", RightTroy},
       {"solo sig wp", SoloSigWP},
       
      
       {"gets long goal control, right side, 7 blocks", control},
-      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+      
       {"Driving", square},
       
       {"Driving", driving},
@@ -95,7 +101,7 @@ void initialize() {
       {"gets long goal control, left side, 7 blocks", LeftControl},
 
       
-      {"r5 manifesting 100 pts", skillsWR},
+      
       {"9 ball 2 control left", troy},
 
       {"testing the macro", whoo},
@@ -178,7 +184,7 @@ void initialize() {
  * the VEX Competition Switch, following either autonomous or opcontrol. When
  * the robot is enabled, this task will exit.
  */
- 
+
 void disabled() {
 
   // pros::delay(50);
@@ -464,15 +470,20 @@ void opcontrol() {
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
       intake1.move(-127);
       intake3.move(-127);
-      intake2.move(-60);
+      intake2.move(-20);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake
-      intake.move(127);
-    } else if (master.get_digital(DIGITAL_L1)) {  // middle
       intake1.move(127);
-      intake2.move(-127);
       intake3.move(127);
+      intake2.move(100);
+    } else if (master.get_digital(DIGITAL_L1)) {  // middle
+      intake1.move(65);
+      intake2.move(-25);
+      intake3.move(65);
     } else if (master.get_digital(DIGITAL_B)) {
-      intake.move(-70);
+      // intake.move(-70);
+      intake1.move(-70);
+      intake3.move(-70);
+      intake2.move(-20);
       // } else if (master.get_digital_new_press(DIGITAL_L2)) {
       //     if (descoreUp == true) {
       //     descore.set(false);
