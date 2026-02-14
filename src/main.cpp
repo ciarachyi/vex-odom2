@@ -82,12 +82,13 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
+      {"solo sig wp", SoloSigWP},
       {"r5 manifesting 100 pts", skillsWR},
       {"arc test", odom_boomerang_injected_pure_pursuit_example},
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
      
       {"9 ball 2 control right", RightTroy},
-      {"solo sig wp", SoloSigWP},
+      
       
      
       {"gets long goal control, right side, 7 blocks", control},
