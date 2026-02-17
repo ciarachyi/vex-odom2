@@ -34,6 +34,7 @@ void rushRightYay();
 void rushLeft();
 void skills();
 void soloR();
+void straight();
 
 // void descoreUp();
 void skills();
