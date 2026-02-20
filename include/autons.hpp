@@ -9,6 +9,7 @@ void odometry_accuracy_test();
 void default_constants();
 void heading();
 void lifted_constants();
+void revOdom();
 
 
 void square();

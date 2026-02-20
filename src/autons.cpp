@@ -63,6 +63,183 @@ void default_constants() {
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there **EXPERIMENT WITH THIS MAYBE
 }
 
+// chassis.pid_odom_angular_constants_set(6.5, 0.0, 43);      // Angular control for odom motions
+//  chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
+
+
+void orig_constants() {
+  // P, I, D, and Start I
+  chassis.pid_drive_constants_set(20.0, 0.0, 130.0);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
+  chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
+  chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
+  chassis.pid_odom_angular_constants_set(6.5, 0.0, 43);      // Angular control for odom motions
+  chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
+
+  // Exit conditions
+  chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
+  chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
+  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 500_ms);
+  chassis.pid_odom_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 750_ms);
+  chassis.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms);
+  chassis.pid_turn_chain_constant_set(3_deg);
+  chassis.pid_swing_chain_constant_set(5_deg);
+  chassis.pid_drive_chain_constant_set(3_in);
+
+  // Slew constants
+  chassis.slew_turn_constants_set(3_deg, 70);
+  chassis.slew_drive_constants_set(3_in, 70);
+  chassis.slew_swing_constants_set(3_in, 80);
+
+  // The amount that turns are prioritized over driving in odom motions
+  // - if you have tracking wheels, you can run this higher.  1.0 is the max
+  chassis.odom_turn_bias_set(0.9);
+
+  chassis.odom_look_ahead_set(7_in);          // This is how far ahead in the path the robot looks at
+  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
+  chassis.odom_boomerang_dlead_set(0.625);    // This handles how aggressive the end of boomerang motions are
+
+  chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
+}
+
+void score() {
+  // P, I, D, and Start I
+  chassis.pid_drive_constants_set(16.0, 0.0, 130.0);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
+  chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
+  chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
+  chassis.pid_odom_angular_constants_set(3, 0.0, 125);      // Angular control for odom motions
+  chassis.pid_odom_boomerang_constants_set(3, 0.0, 125);  // Angular control for boomerang motions
+
+  // Exit conditions
+  chassis.pid_turn_exit_condition_set(80_ms, 7_deg, 250_ms, 7_deg, 500_ms, 500_ms);
+  chassis.pid_swing_exit_condition_set(80_ms, 7_deg, 250_ms, 7_deg, 500_ms, 500_ms);
+  chassis.pid_drive_exit_condition_set(80_ms, 5_in, 250_ms, 3_in, 500_ms, 500_ms);
+  chassis.pid_odom_turn_exit_condition_set(80_ms, 7_deg, 250_ms, 7_deg, 500_ms, 750_ms);
+  chassis.pid_odom_drive_exit_condition_set(80_ms, 5_in, 250_ms, 3_in, 500_ms, 750_ms);
+  chassis.pid_turn_chain_constant_set(7_deg);
+  chassis.pid_swing_chain_constant_set(7_deg);
+  chassis.pid_drive_chain_constant_set(3_in);
+
+  // Slew constants
+  chassis.slew_turn_constants_set(3_deg, 70);
+  chassis.slew_drive_constants_set(3_in, 70);
+  chassis.slew_swing_constants_set(3_in, 80);
+
+  // The amount that turns are prioritized over driving in odom motions
+  // - if you have tracking wheels, you can run this higher.  1.0 is the max
+  chassis.odom_turn_bias_set(0.9);
+
+  chassis.odom_look_ahead_set(7_in);          // This is how far ahead in the path the robot looks at
+  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
+  chassis.odom_boomerang_dlead_set(0.625);    // This handles how aggressive the end of boomerang motions are
+
+  chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
+}
+
+
+void vroom() {
+  // P, I, D, and Start I
+  chassis.pid_drive_constants_set(20.0, 0.0, 100.0);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
+  chassis.pid_turn_constants_set(3.0, 0.05, 20.0, 15.0);     // Turn in place constants
+  chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
+  chassis.pid_odom_angular_constants_set(6.5, 0.0, 43);      // Angular control for odom motions
+  chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
+
+  // Exit conditions
+  chassis.pid_turn_exit_condition_set(30_ms, 7_deg, 250_ms, 7_deg, 500_ms, 500_ms);
+  chassis.pid_swing_exit_condition_set(30_ms, 7_deg, 250_ms, 7_deg, 500_ms, 500_ms);
+  chassis.pid_drive_exit_condition_set(30_ms, 4_in, 250_ms, 3_in, 500_ms, 500_ms);
+  chassis.pid_odom_turn_exit_condition_set(30_ms, 7_deg, 250_ms, 7_deg, 500_ms, 750_ms);
+  chassis.pid_odom_drive_exit_condition_set(30_ms, 4_in, 250_ms, 3_in, 500_ms, 750_ms);
+  chassis.pid_turn_chain_constant_set(7_deg);
+  chassis.pid_swing_chain_constant_set(7_deg);
+  chassis.pid_drive_chain_constant_set(4_in);
+
+  // Slew constants
+  chassis.slew_turn_constants_set(3_deg, 70);
+  chassis.slew_drive_constants_set(3_in, 70);
+  chassis.slew_swing_constants_set(3_in, 80);
+
+  // The amount that turns are prioritized over driving in odom motions
+  // - if you have tracking wheels, you can run this higher.  1.0 is the max
+  chassis.odom_turn_bias_set(0.9);
+
+  chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
+  chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
+  chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are
+
+  chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
+}
+
+void control() {
+  orig_constants();
+
+  chassis.odom_xy_set(-50, -12);
+  chassis.drive_angle_set(115_deg);
+
+  pros::delay(20);
+
+  intake.move(127);
+  descore.set_value(1);
+  chassis.pid_odom_set({{{-23_in, -22_in}, fwd, 127}}, false);
+
+  pros::delay(550);
+  tongue.set_value(1);
+  pros::delay(230);
+
+  chassis.pid_turn_set(222_deg, TURN_SPEED);
+  pros::delay(390);
+  chassis.pid_odom_set({{{-55_in, -47.5_in, 246_deg}, fwd, 127}}, false);
+
+  pros::delay(1350);
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(150);
+  chassis.pid_drive_set(15_in, 90, false);
+  pros::delay(600);
+  // chassis.pid_wait_until(5);
+  // pros::delay(90);
+  // chassis.pid_targets_reset();
+
+  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(750);
+
+  chassis.pid_odom_set({{{-22_in, -48_in, 270_deg}, rev, 127}}, false);
+  pros::delay(750);
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED, true);
+  intake.move(-100);
+  pros::delay(150);
+  // chassis.pid_wait_quick_chain();
+  intake.move(127);
+  // chassis.pid_odom_set({{{-48_in, -48_in, 270_deg}, rev, 127}}, false);
+  descore.set_value(0);
+
+  pros::delay(1600);
+
+  chassis.pid_drive_set(4_in, DRIVE_SPEED, true);
+  tongue.set_value(0);
+  pros::delay(250);
+  descore.set_value(1);
+  chassis.pid_drive_set(-4_in, DRIVE_SPEED, true);
+
+  // chassis.pid_drive_set(13_in, 127, true);
+  // intake.move(-127);
+  // tongue.set_value(0);
+
+  // pros::delay(400);
+  // chassis.pid_turn_set(225_deg, TURN_SPEED);
+  // pros::delay(450);
+
+  // chassis.pid_odom_set({{{-21_in, -35.8_in}, rev, DRIVE_SPEED}}, false);
+  // pros::delay(700);
+  // chassis.pid_turn_set(272_deg, TURN_SPEED);
+
+  // pros::delay(300);
+  // chassis.pid_drive_set(-20_in, 127, true);
+}
+
 void good_constants() {
   // P, I, D, and Start I
   chassis.pid_drive_constants_set(10.5, 0.9, 96.0);      // Fwd/rev constants, used for odom and non odom motions
@@ -102,76 +279,6 @@ void straight() {
   chassis.pid_drive_set(2, 127, true);
 }
 
-// void default_constants() {
-//   // P, I, D, and Start I
-//   chassis.pid_drive_constants_set(10.5, 0.9, 96.0);      // Fwd/rev constants, used for odom and non odom motions
-//   chassis.pid_heading_constants_set(15.0, 0.0, 24.5);    // Holds the robot straight while going forward without odom
-//   chassis.pid_turn_constants_set(2, 0.05, 22, 15.0);     // Turn in place constants
-//   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);       // Swing constants
-//   chassis.pid_odom_angular_constants_set(6.5, 0.2, 75);  // Angular control for odom motions
-//   chassis.pid_odom_boomerang_constants_set(6, 0.6, 58);  // Angular control for boomerang motions
-
-//   // Exit conditions
-//   chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
-//   chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
-//   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 350_ms, 350_ms);
-//   chassis.pid_odom_turn_exit_condition_set(90_ms, 4_deg, 250_ms, 7_deg, 500_ms, 750_ms);
-//   chassis.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms);
-//   chassis.pid_turn_chain_constant_set(3_deg);
-//   chassis.pid_swing_chain_constant_set(5_deg);
-//   chassis.pid_drive_chain_constant_set(3_in);
-
-//   // Slew constants
-//   chassis.slew_turn_constants_set(3_deg, 70);
-//   chassis.slew_drive_constants_set(3_in, 70);
-//   chassis.slew_swing_constants_set(3_in, 80);
-
-//   // The amount that turns are prioritized over driving in odom motions
-//   // - if you have tracking wheels, you can run this higher.  1.0 is the max
-//   chassis.odom_turn_bias_set(0.7);
-
-//   chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
-//   chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
-//   chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are **TRY THIS
-
-//   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there **EXPERIMENT WITH THIS MAYBE
-// }
-
-// void default_constants() {
-//   // P, I, D, and Start I
-//   chassis.pid_drive_constants_set(10, 0.0, 40.0);      // Fwd/rev constants, used for odom and non odom motions
-//   chassis.pid_heading_constants_set(15.0, 0.0, 24.5);    // Holds the robot straight while going forward without odom
-//   chassis.pid_turn_constants_set(2, 0.05, 22, 15.0);     // Turn in place constants
-//   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);       // Swing constants
-//   chassis.pid_odom_angular_constants_set(3, 0, 70);  // Angular control for odom motions
-//   chassis.pid_odom_boomerang_constants_set(3, 0, 70);  // Angular control for boomerang motions
-
-//   // Exit conditions
-//   chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
-//   chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 250_ms, 7_deg, 500_ms, 500_ms);
-//   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 350_ms, 350_ms);
-//   chassis.pid_odom_turn_exit_condition_set(90_ms, 4_deg, 250_ms, 7_deg, 500_ms, 750_ms);
-//   chassis.pid_odom_drive_exit_condition_set(90_ms, 1_in, 250_ms, 3_in, 500_ms, 750_ms);
-//   chassis.pid_turn_chain_constant_set(3_deg);
-//   chassis.pid_swing_chain_constant_set(5_deg);
-//   chassis.pid_drive_chain_constant_set(3_in);
-
-//   // Slew constants
-//   chassis.slew_turn_constants_set(3_deg, 70);
-//   chassis.slew_drive_constants_set(3_in, 70);
-//   chassis.slew_swing_constants_set(3_in, 80);
-
-//   // The amount that turns are prioritized over driving in odom motions
-//   // - if you have tracking wheels, you can run this higher.  1.0 is the max
-//   chassis.odom_turn_bias_set(0.7);
-
-//   chassis.odom_look_ahead_set(7_in);           // This is how far ahead in the path the robot looks at
-//   chassis.odom_boomerang_distance_set(16_in);  // This sets the maximum distance away from target that the carrot point can be
-//   chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are **TRY THIS
-
-//   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there **EXPERIMENT WITH THIS MAYBE
-// }
-
 void heading() {
   // P, I, D, and Start I
   chassis.pid_drive_constants_set(10.5, 0, 96.0);        // Fwd/rev constants, used for odom and non odom motions
@@ -205,6 +312,21 @@ void heading() {
   chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are **TRY THIS
 
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there **EXPERIMENT WITH THIS MAYBE
+}
+
+void odom_pure_pursuit_example() {
+  // Drive to 0, 30 and pass through 6, 10 and 0, 20 on the way, with slew
+  orig_constants();
+  chassis.pid_odom_set({{{6_in, 10_in}, fwd, DRIVE_SPEED},
+                        {{0_in, 20_in}, fwd, DRIVE_SPEED},
+                        {{0_in, 30_in}, fwd, DRIVE_SPEED}},
+                       true);
+  chassis.pid_wait();
+
+  // Drive to 0, 0 backwards
+  chassis.pid_odom_set({{0_in, 0_in}, rev, DRIVE_SPEED},
+                       true);
+  chassis.pid_wait();
 }
 
 void odom_boomerang_injected_pure_pursuit_example() {
@@ -244,6 +366,15 @@ void parkDistance() {
 //   }
 // }
 
+void revOdom(){
+
+  chassis.drive_angle_set(-90_deg);
+  orig_constants();
+  pros::delay(20);
+  chassis.pid_odom_set({{{-20_in, -10_in, 90_deg}, rev, 127}}, false);
+
+}
+
 void drive_until_distance(double threshold_mm) {
   // Continuously check the distance sensor
   while (frontDistance.get() > threshold_mm) {
@@ -261,11 +392,14 @@ void whoo() {
 }
 
 void skillsWR() {
-  default_constants();
+  orig_constants();
   chassis.odom_xy_set(-50, 12);
   chassis.drive_angle_set(65_deg);
-  chassis.pid_drive_chain_constant_set(3_in);
 
+
+  // chassis.pid_drive_chain_constant_set(3_in);
+
+  pros::delay(20);
   descore.set_value(1);
   intake.move(127);
 
@@ -276,7 +410,7 @@ void skillsWR() {
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
   pros::delay(500);
 
-  chassis.pid_odom_set({{{-5.5_in, 13_in}, rev, 127}}, true);
+  chassis.pid_odom_set({{{-5.5_in, 14_in}, rev, 127}}, true);
 
   pros::delay(400);
 
@@ -297,7 +431,7 @@ void skillsWR() {
   // chassis.pid_drive_set(24, 127, true);
 
   // pros::delay(550);
-  chassis.pid_odom_set({{{-54_in, 42.5_in, -90_deg}, fwd, 127}}, true);
+  chassis.pid_odom_set({{{-54_in, 42_in, -90_deg}, fwd, 127}}, true);
   tongue.set_value(1);
   pros::delay(1000);
 
@@ -305,10 +439,10 @@ void skillsWR() {
   pros::delay(90);
 
   intake.move(127);
-  chassis.pid_drive_set(21.5, 55, false);  // match load #1
+  chassis.pid_drive_set(20, 55, false);  // match load #1
 
   chassis.pid_wait_until(18);
-  pros::delay(700);
+  pros::delay(500);
   // chassis.pid_targets_reset();
 
   chassis.pid_drive_set(-8, 127, false);
@@ -330,12 +464,31 @@ void skillsWR() {
   pros::delay(150);
   tongue.set_value(0);
   intake.move(0);
-  chassis.pid_drive_set(-72, 127, true);
-  chassis.pid_wait_until(-58);
-  // descore.set_value(1);
-  chassis.pid_speed_max_set(70);
 
-  pros::delay(700);
+  // chassis.pid_odom_set({{{54_in, 59_in, -90_deg}, rev, 127}}, true);
+
+  chassis.pid_drive_set(-78, 100, true);
+
+
+  // chassis.pid_wait_until(-58);
+  // // descore.set_value(1);
+  // chassis.pid_speed_max_set(50);
+
+  chassis.pid_wait_quick_chain();
+  score();
+  pros::delay(50);
+
+
+  chassis.pid_turn_set(45_deg, TURN_SPEED);
+  pros::delay(200);
+  // chassis.pid_wait_quick_chain();
+
+  // chassis.pid_wait_quick_chain();
+
+
+
+  // pros::delay(700);
+
   // chassis.pid_odom_set({
   //                          {{48_in, 59_in, -89_deg}, rev, 127},
 
@@ -350,13 +503,29 @@ void skillsWR() {
   // chassis.pid_drive_set(-14, 127, false);
   // pros::delay(500);
 
-  chassis.pid_odom_set({{{29_in, 50.4_in, 90_deg}, rev, 127}}, false);  // first scoring
+  chassis.pid_odom_set({
+                           {{30_in, 49_in}, rev, 127},
 
-  pros::delay(2100);
+                           {{26_in, 48.5_in, 90_deg}, rev, 127},
+                       },  // park
+                       true);
+
+
+  // chassis.pid_odom_set({{{29_in, 49_in, 90_deg}, rev, 127}}, false);  // first scoring
+
+
+
+  pros::delay(2800);
+
+
+
+  // pros::delay(2100);
+  // chassis.pid_wait();
 
   chassis.pid_turn_set(90_deg, TURN_SPEED);
 
   chassis.pid_drive_set(-6, 127, true);
+  pros::delay(100);
 
   // chassis.pid_turn_set(90_deg, TURN_SPEED);
 
@@ -364,6 +533,7 @@ void skillsWR() {
   // chassis.pid_drive_set(-9, 127, false);
   // pros::delay(250);
 
+  orig_constants();
   intake2.move(127);
   intake1.move(-127);
   intake3.move(-127);
@@ -426,36 +596,43 @@ void skillsWR() {
   chassis.pid_odom_set({
                            {{54.5_in, 34_in}, fwd, 127},
 
-                           {{68_in, 12.3_in, 173_deg}, fwd, 127},
+                           {{71.8_in, 13_in, 173_deg}, fwd, 127},
                        },  // park
                        true);
 
   chassis.pid_wait_until_index(0);
 
-  // chassis.odom_xy_set(68.2, 25);
-  // chassis.drive_angle_set(178_deg);
-  // intake.move(127);     //COMMENT THIS OUT LATER
 
-  descore.set_value(1);
+  descore.set_value(1);   //put this back in
   pros::delay(1550);
 
-  tongue.set_value(1);
-  pros::delay(100);
+
+
+  // tongue.set_value(1);
+  // pros::delay(100);
 
   // chassis.pid_drive_set(-8_in, 127, true);
   // pros::delay(300);
 
   chassis.pid_turn_set(175_deg, TURN_SPEED);
 
+
+  // chassis.odom_xy_set(71, 12.3);
+  // chassis.drive_angle_set(173_deg);
+  // intake.move(127);     //COMMENT THIS OUT LATER
+
+
+
+
   pod.set_value(1);
   descore.set_value(1);
   pros::delay(400);
-  chassis.pid_drive_set(34_in, 110, false);
-  tongue.set_value(0);
-  pros::delay(1400);
-  chassis.pid_turn_set(175_deg, TURN_SPEED);
-  chassis.pid_drive_set(50_in, 90, true);
-  pros::delay(2200);
+  chassis.pid_drive_set(82_in, 110, true);
+  // tongue.set_value(0);
+  // pros::delay(1400);
+  // chassis.pid_turn_set(175_deg, TURN_SPEED);
+  // chassis.pid_drive_set(50_in, 90, true);
+  pros::delay(4500);
 
   // tongueDistance(1670);
   // pros::delay(2700);
@@ -538,15 +715,26 @@ void skillsWR() {
   tongue.set_value(0);
   intake.move(0);
 
-  chassis.pid_drive_set(-68, 127, true);
+  chassis.pid_drive_set(-68, 100, true);
   // chassis.pid_wait_quick_chain();
   pros::delay(1450);
+  score();
+  pros::delay(20);
   // chassis.pid_turn_set(-135_deg, TURN_SPEED);
   // pros::delay(450);
   // chassis.pid_drive_set(-14, 127, false);
   // pros::delay(500);
 
-  chassis.pid_odom_set({{{-20_in, -53.9_in, -90_deg}, rev, 127}}, true);  // 3rd scoring
+  chassis.pid_odom_set({
+                           {{-26_in, -53.9_in}, fwd, 127},
+
+                           {{-20_in, -53.9_in, -90_deg}, fwd, 127},
+                       },  // park
+                       true);
+
+  // chassis.pid_odom_set({{{-20_in, -53.9_in, -90_deg}, rev, 127}}, true);  // 3rd scoring
+
+
 
   pros::delay(2500);
   chassis.pid_drive_set(-10, 127, false);
@@ -556,6 +744,7 @@ void skillsWR() {
   intake1.move(-127);
   intake3.move(-127);
 
+  orig_constants();
   pros::delay(150);
 
   descore.set_value(0);
@@ -599,7 +788,7 @@ void skillsWR() {
 
   chassis.pid_odom_set({
                            {{-48_in, -38_in}, fwd, 127},
-                           {{-57.6_in, -17_in, -2_deg}, fwd, 127},
+                           {{-58_in, -17_in, -2_deg}, fwd, 127},
                        },  // park
                        true);
 
@@ -658,10 +847,12 @@ void driveBack() {
 // printf("Odometry: X: %.2f, Y: %.2f, Theta: %.2f\n", chassis.odom_x_get(), chassis.odom_y_get(), chassis.odom_theta_get());
 
 void LeftControl() {
-  default_constants();
+  orig_constants();
 
   chassis.odom_xy_set(-50, 12);
   chassis.drive_angle_set(65_deg);
+
+  pros::delay(20);
 
   intake.move(127);
   descore.set_value(1);
@@ -673,78 +864,113 @@ void LeftControl() {
 
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
   pros::delay(390);
-  chassis.pid_odom_set({{{-58_in, 47.2_in, -66_deg}, fwd, 127}}, false);
+  chassis.pid_odom_set({{{-58_in, 48_in, -66_deg}, fwd, 127}}, false);
 
-  pros::delay(1400);
-  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(1100);
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
   pros::delay(200);
-  chassis.pid_drive_set(17_in, 45, false);
-  chassis.pid_wait_until(6);
-  pros::delay(90);
-  chassis.pid_targets_reset();
+  chassis.pid_drive_set(18.5_in, 45, false);
 
-  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
-  chassis.pid_turn_set(270_deg, TURN_SPEED);
-  pros::delay(750);
+  pros::delay(900);
+  // chassis.pid_wait_until(6);
+  // pros::delay(90);
+  // chassis.pid_targets_reset();
 
-  chassis.pid_odom_set({{{-22_in, 47_in, 270_deg}, rev, 127}}, false);
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED, true);
+  // chassis.pid_turn_set(270_deg, TURN_SPEED);
+  pros::delay(650);
+
+  chassis.pid_odom_set({{{-22_in, 47_in, -90_deg}, rev, 127}}, false);
   pros::delay(750);
-  chassis.pid_drive_set(-16_in, DRIVE_SPEED, true);
+  chassis.pid_drive_set(-2_in, DRIVE_SPEED, true);
   intake.move(-100);
   pros::delay(150);
   // chassis.pid_wait_quick_chain();
   intake.move(127);
   // chassis.pid_odom_set({{{-48_in, -48_in, 270_deg}, rev, 127}}, false);
   descore.set_value(0);
+
   pros::delay(1500);
-  chassis.pid_turn_set(-90_deg, TURN_SPEED);
-  pros::delay(100);
-  chassis.pid_drive_set(20_in, 127, true);
-  intake.move(0);
+
+  chassis.pid_drive_set(6_in, DRIVE_SPEED, true);
   tongue.set_value(0);
-
-  pros::delay(400);
-  chassis.pid_turn_set(-135_deg, TURN_SPEED);
-  pros::delay(450);
-
-  chassis.pid_odom_set({{{-17_in, 60.9_in}, rev, DRIVE_SPEED}}, false);
-  pros::delay(1000);
-  chassis.pid_turn_set(268_deg, TURN_SPEED);
-
   pros::delay(300);
-  chassis.pid_drive_set(-20_in, 127, true);
+  descore.set_value(1);
+  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
+
+  // chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  // pros::delay(100);
+  // chassis.pid_drive_set(20_in, 127, true);
+  // intake.move(0);
+  // tongue.set_value(0);
+
+  // pros::delay(400);
+  // chassis.pid_turn_set(-135_deg, TURN_SPEED);
+  // pros::delay(450);
+
+  // chassis.pid_odom_set({{{-17_in, 60.9_in}, rev, DRIVE_SPEED}}, false);
+  // pros::delay(1000);
+  // chassis.pid_turn_set(268_deg, TURN_SPEED);
+
+  // pros::delay(300);
+  // chassis.pid_drive_set(-20_in, 127, true);
 }
 
 void RightTroy() {
-  default_constants();
+  orig_constants();
   chassis.odom_xy_set(-50, -12);
   chassis.drive_angle_set(115_deg);
+
+  pros::delay(20);
   descore.set_value(1);
   intake.move(127);
 
   chassis.pid_odom_set({{{-15_in, -31_in, 140_deg}, fwd, 127}}, true);
-  pros::delay(650);
+  pros::delay(550);
   tongue.set_value(1);
-  pros::delay(250);
-  chassis.pid_odom_set({{{-7_in, -52.5_in, 155_deg}, fwd, 127}}, true);
-  pros::delay(250);
+  pros::delay(350);
+  chassis.pid_odom_set({{{-3_in, -51.5_in, 155_deg}, fwd, 127}}, true);
+  pros::delay(200);
   tongue.set_value(0);
-  pros::delay(1550);
+  pros::delay(1350);
 
-  chassis.pid_odom_set({{{-23.5_in, -34.5_in}, rev, 127}}, true);
-  pros::delay(1250);
-  chassis.pid_turn_set(2_deg, TURN_SPEED);
-  pros::delay(450);
+  vroom();
+  pros::delay(20);
 
-  heading();
-  chassis.pid_drive_set(-10.5, 127, true);
+  chassis.pid_odom_set({
+                           {{-21_in, -34_in}, rev, 127},
+                           //  {{-18_in, -35_in}, rev, 127},
+                           {{-38_in, -47_in}, rev, 127},
+                       },  // park
+                       true);
 
-  pros::delay(700);  // GO BACK TO 700
-  default_constants();
-  pros::delay(10);
-  chassis.pid_swing_set(ez::LEFT_SWING, -92, 127, 17);
+  // chassis.pid_odom_set({{{-23.5_in, -34.5_in}, rev, 127}}, true);
+  // pros::delay(1250);
+  // chassis.pid_turn_set(2_deg, TURN_SPEED);
+  // pros::delay(450);
 
-  pros::delay(750);
+  // heading();
+  // chassis.pid_drive_set(-10.5, 127, true);
+
+  // pros::delay(700);  // GO BACK TO 700
+  // default_constants();
+  // pros::delay(10);
+  // chassis.pid_swing_set(ez::LEFT_SWING, -92, 127, 17);
+
+  // pros::delay(750);
+
+  chassis.pid_wait_quick_chain();
+  orig_constants();
+
+  // pros::delay(2900);
+  // chassis.pid_turn_set(-90_deg, TURN_SPEED);
+
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  pros::delay(300);
+
+  chassis.pid_drive_set(-14_in, 127, false);
+
+  pros::delay(400);
 
   descore.set_value(0);
   intake2.move(127);
@@ -755,7 +981,7 @@ void RightTroy() {
   intake.move(127);
   pros::delay(1200);
   tongue.set_value(1);
-  chassis.pid_odom_set({{{-48_in, -45_in}, fwd, 127}}, true);  // match load
+  chassis.pid_odom_set({{{-48_in, -45.5_in}, fwd, 127}}, true);  // match load
 
   pros::delay(700);
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
@@ -763,9 +989,9 @@ void RightTroy() {
   pros::delay(150);
   descore.set_value(1);
   chassis.pid_drive_set(19.5_in, 50, false);
-  pros::delay(1150);
+  pros::delay(1050);
 
-  chassis.pid_drive_set(-10, 127, false);
+  chassis.pid_drive_set(-9, 127, false);
   pros::delay(300);
   chassis.pid_turn_set(45_deg, TURN_SPEED);
   pros::delay(500);
@@ -773,8 +999,8 @@ void RightTroy() {
   tongue.set_value(0);
   // chassis.pid_drive_set(40, 127, false);
   // chassis.pid_wait_until(38_in);
-  chassis.pid_odom_set({{{-8_in, -17_in, 55_deg}, fwd, 127}}, true);  // mid goal
-  intake1.move(127);
+  chassis.pid_odom_set({{{-8_in, -16_in, 55_deg}, fwd, 127}}, true);  // mid goal
+  intake1.move(100);
   intake3.move(-127);
   intake2.move(-127);
 
@@ -804,7 +1030,7 @@ void RightTroy() {
   chassis.pid_drive_set(-30, 127, true);
   chassis.pid_wait_until(-26_in);
   descore.set_value(0);
-  chassis.pid_odom_set({{{-29_in, -41_in}, rev, 127}}, true);  // push
+  chassis.pid_odom_set({{{-29_in, -37_in}, rev, 127}}, true);  // push
   pros::delay(350);
 
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
@@ -1042,69 +1268,6 @@ void SoloSigWP() {
   intake.move(127);
   pros::delay(1200);
   chassis.pid_drive_set(6, 127, true);
-}
-
-void control() {
-  default_constants();
-
-  chassis.odom_xy_set(-50, -12);
-  chassis.drive_angle_set(115_deg);
-
-  intake.move(127);
-  descore.set_value(1);
-  chassis.pid_odom_set({{{-12.5_in, -27.2_in, 125_deg}, fwd, 127}}, false);
-
-  pros::delay(600);
-  tongue.set_value(1);
-  pros::delay(180);
-
-  chassis.pid_turn_set(225_deg, TURN_SPEED);
-  pros::delay(390);
-  chassis.pid_odom_set({{{-55_in, -47.5_in, 246_deg}, fwd, 127}}, false);
-
-  pros::delay(1400);
-  chassis.pid_turn_set(270_deg, TURN_SPEED);
-  pros::delay(200);
-  chassis.pid_drive_set(15_in, 95, false);
-  pros::delay(600);
-  // chassis.pid_wait_until(5);
-  // pros::delay(90);
-  // chassis.pid_targets_reset();
-
-  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
-  chassis.pid_turn_set(270_deg, TURN_SPEED);
-  pros::delay(750);
-
-  chassis.pid_odom_set({{{-22_in, -48_in, 270_deg}, rev, 127}}, false);
-  pros::delay(750);
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED, true);
-  intake.move(-100);
-  pros::delay(150);
-  // chassis.pid_wait_quick_chain();
-  intake.move(127);
-  // chassis.pid_odom_set({{{-48_in, -48_in, 270_deg}, rev, 127}}, false);
-  descore.set_value(0);
-  pros::delay(1650);
-
-  chassis.pid_drive_set(12_in, DRIVE_SPEED, true);
-  pros::delay(350);
-  descore.set_value(1);
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED, true);
-
-  // chassis.pid_drive_set(13_in, 127, true);
-  // intake.move(-127);
-  // tongue.set_value(0);
-
-  // pros::delay(400);
-  // chassis.pid_turn_set(225_deg, TURN_SPEED);
-  // pros::delay(450);
-
-  // chassis.pid_odom_set({{{-21_in, -35.8_in}, rev, DRIVE_SPEED}}, false);
-  // pros::delay(700);
-  // chassis.pid_turn_set(272_deg, TURN_SPEED);
-
-  // pros::delay(300);
-  // chassis.pid_drive_set(-20_in, 127, true);
 }
 
 void square() {

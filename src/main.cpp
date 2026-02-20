@@ -22,8 +22,8 @@ ez::Drive chassis(
 //  - you should get positive values on the encoders going FORWARD and RIGHT
 // - `2.75` is the wheel diameter
 // - `4.0` is the distance from the center of the wheel to the center of the robot
-ez::tracking_wheel horiz_tracker(18, 2, 3.32, 1);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(-11, 2, 0.36, 1);  // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel horiz_tracker(18, 2, 4.60, 1);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(-11, 2, 0.16, 1);  // This tracking wheel is parallel to the drive wheels
 
 ez::Piston tongue('D');
 ez::Piston park('A');
@@ -82,14 +82,22 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
-      {"gets long goal control, right side, 7 blocks", control},
-      {"solo sig wp", SoloSigWP},
       {"SKILLS r5 manifesting 100 pts", skillsWR},
+      {"reverse odom test", revOdom},
+      
+      
+      {"gets long goal control, left side, 7 blocks", LeftControl},
+      {"RIGHT 6+3, 9 ball 2 control right", RightTroy},
+      {"gets long goal control, right side, 7 blocks", control},
+      {"like a weird s", odom_pure_pursuit_example},
+      {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
+      
+      {"solo sig wp", SoloSigWP},
       
       {"drive forward 2 inches", straight},
       
       {"6+3, 9 ball 2 control left", troy},
-      {"RIGHT 6+3, 9 ball 2 control right", RightTroy},
+      
       
       
       
@@ -110,7 +118,7 @@ void initialize() {
      
      
       {"gets long goal control, right side, 7 blocks", control},
-      {"gets long goal control, left side, 7 blocks", LeftControl},
+      
 
       
       
@@ -141,7 +149,7 @@ void initialize() {
 
       // {"rush left blocks", rush},
 
-      {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
+      
 
       // {"top middle goal and left long goal", topAndLeft},
       // {"clear stuff", skills},
@@ -480,7 +488,7 @@ void opcontrol() {
     //             pros::delay(20);
 
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
-      intake1.move(-127);
+      intake1.move(-95);
       intake3.move(-127);
       intake2.move(-20);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake
@@ -488,12 +496,12 @@ void opcontrol() {
       intake3.move(127);
       intake2.move(127);
     } else if (master.get_digital(DIGITAL_L1)) {  // middle
-      intake1.move(127);
-      intake2.move(-127);
-      intake3.move(127);
-      // intake1.move(65);
-      // intake2.move(-15);
-      // intake3.move(65);
+      // intake1.move(127);
+      // intake2.move(-127);
+      // intake3.move(127);
+      intake1.move(65);
+      intake2.move(-15);
+      intake3.move(45);
     } else if (master.get_digital(DIGITAL_B)) {
       // intake.move(-70);
       intake1.move(-70);
