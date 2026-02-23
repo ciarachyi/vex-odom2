@@ -10,6 +10,7 @@ void default_constants();
 void heading();
 void lifted_constants();
 void revOdom();
+void newSolo();
 
 
 void square();

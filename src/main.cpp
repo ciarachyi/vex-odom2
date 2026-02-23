@@ -13,7 +13,7 @@ ez::Drive chassis(
     {-10, -6, -7},  // Left Chassis Ports (negative port will reverse it!)
     {20, 9, 8},     // Right Chassis Ports (negative port will reverse it!)
 
-    17,    // IMU Port
+    16,    // IMU Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);  // WheelRPM = cartridge * (motor gear / wheel gear)
 
@@ -82,7 +82,12 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
+      {"6+3, 9 ball 2 control left", troy},
       {"SKILLS r5 manifesting 100 pts", skillsWR},
+      {"solo sig wp ends at mid goal", newSolo},
+      
+     
+     
       {"reverse odom test", revOdom},
       
       
@@ -96,7 +101,7 @@ void initialize() {
       
       {"drive forward 2 inches", straight},
       
-      {"6+3, 9 ball 2 control left", troy},
+      
       
       
       
