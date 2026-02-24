@@ -82,8 +82,10 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
-      {"6+3, 9 ball 2 control left", troy},
+      {"testing the park", parkTest},
       {"SKILLS r5 manifesting 100 pts", skillsWR},
+      {"6+3, 9 ball 2 control left", troy},
+      
       {"solo sig wp ends at mid goal", newSolo},
       
      
