@@ -12,6 +12,7 @@ void lifted_constants();
 void revOdom();
 void newSolo();
 
+void right4p3();
 void parkTest();
 
 void square();

@@ -82,58 +82,36 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
-      {"testing the park", parkTest},
-      {"SKILLS r5 manifesting 100 pts", skillsWR},
-      {"6+3, 9 ball 2 control left", troy},
-      
       {"solo sig wp ends at mid goal", newSolo},
-      
-     
-     
+      {"right side 4 + 3", right4p3},
+      {"6+3, 9 ball 2 control left", troy},
+      {"gets long goal control, right side, 7 blocks", control},
+
+      {"SKILLS r5 manifesting 100 pts", skillsWR},
+      {"testing the park", parkTest},
+
       {"reverse odom test", revOdom},
-      
-      
+
       {"gets long goal control, left side, 7 blocks", LeftControl},
       {"RIGHT 6+3, 9 ball 2 control right", RightTroy},
-      {"gets long goal control, right side, 7 blocks", control},
+
       {"like a weird s", odom_pure_pursuit_example},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
-      
+
       {"solo sig wp", SoloSigWP},
-      
+
       {"drive forward 2 inches", straight},
-      
-      
-      
-      
-      
-      
-      
-      
+
       {"arc test", odom_boomerang_injected_pure_pursuit_example},
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
-     
-      
-      
-      
-     
-      
-      
-      {"Driving", square},
-      
-      {"Driving", driving},
-     
-     
-      {"gets long goal control, right side, 7 blocks", control},
-      
 
-      
-      
-      
+      {"Driving", square},
+
+      {"Driving", driving},
+
+      {"gets long goal control, right side, 7 blocks", control},
 
       {"testing the macro", whoo},
-
-      
 
       {"testing the distance reset", practiceDistance},
 
@@ -142,8 +120,6 @@ void initialize() {
       {"yay", driveBack},
 
       {"rushes right side blocks", rushRightYay},
-
-     
 
       {"go in a square", drive_and_turn},
 
@@ -155,8 +131,6 @@ void initialize() {
       {"scores 9 in the left long goal", leftNineBall},
 
       // {"rush left blocks", rush},
-
-      
 
       // {"top middle goal and left long goal", topAndLeft},
       // {"clear stuff", skills},
@@ -213,7 +187,6 @@ void initialize() {
  */
 
 void disabled() {
-
   // pros::delay(50);
   // park.set(true);
 
