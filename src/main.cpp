@@ -82,13 +82,16 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
+      {"SKILLS r5 manifesting 100 pts", skillsWR},
+      {"testing the park", parkTest},
+     
       {"solo sig wp ends at mid goal", newSolo},
       {"right side 4 + 3", right4p3},
       {"6+3, 9 ball 2 control left", troy},
       {"gets long goal control, right side, 7 blocks", control},
 
-      {"SKILLS r5 manifesting 100 pts", skillsWR},
-      {"testing the park", parkTest},
+      
+     
 
       {"reverse odom test", revOdom},
 
@@ -468,7 +471,7 @@ void opcontrol() {
     //             pros::delay(20);
 
     if (master.get_digital(DIGITAL_R2)) {  // outtake everything
-      intake1.move(-95);
+      intake1.move(-100);
       intake3.move(-127);
       intake2.move(-20);
     } else if (master.get_digital(DIGITAL_R1)) {  // intake
@@ -481,10 +484,10 @@ void opcontrol() {
       // intake3.move(127);
       intake1.move(65);
       intake2.move(-15);
-      intake3.move(45);
+      intake3.move(60);
     } else if (master.get_digital(DIGITAL_B)) {
       // intake.move(-70);
-      intake1.move(-70);
+      intake1.move(-52);
       intake3.move(-70);
       intake2.move(-20);
       // } else if (master.get_digital_new_press(DIGITAL_L2)) {
