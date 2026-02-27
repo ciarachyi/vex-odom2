@@ -82,6 +82,7 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
+      {"gets long goal control, left side, 7 blocks", LeftControl},
       {"SKILLS r5 manifesting 100 pts", skillsWR},
       {"testing the park", parkTest},
      
@@ -95,7 +96,7 @@ void initialize() {
 
       {"reverse odom test", revOdom},
 
-      {"gets long goal control, left side, 7 blocks", LeftControl},
+      
       {"RIGHT 6+3, 9 ball 2 control right", RightTroy},
 
       {"like a weird s", odom_pure_pursuit_example},

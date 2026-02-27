@@ -1159,12 +1159,12 @@ void LeftControl() {
 
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
   pros::delay(390);
-  chassis.pid_odom_set({{{-58_in, 48_in, -66_deg}, fwd, 127}}, false);
+  chassis.pid_odom_set({{{-55_in, 46.5_in, -66_deg}, fwd, 127}}, false);
 
   pros::delay(1100);
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
   pros::delay(200);
-  chassis.pid_drive_set(18.5_in, 45, false);
+  chassis.pid_drive_set(19_in, 45, false);
 
   pros::delay(900);
   // chassis.pid_wait_until(6);
@@ -1173,11 +1173,11 @@ void LeftControl() {
 
   chassis.pid_drive_set(-12_in, DRIVE_SPEED, true);
   // chassis.pid_turn_set(270_deg, TURN_SPEED);
-  pros::delay(650);
+  pros::delay(375);
 
-  chassis.pid_odom_set({{{-22_in, 47_in, -90_deg}, rev, 127}}, false);
+  chassis.pid_odom_set({{{-14_in, 46_in, -90_deg}, rev, 127}}, false);
   pros::delay(750);
-  chassis.pid_drive_set(-2_in, DRIVE_SPEED, true);
+  chassis.pid_drive_set(-5_in, DRIVE_SPEED, true);
   intake.move(-100);
   pros::delay(150);
   // chassis.pid_wait_quick_chain();
@@ -1185,13 +1185,13 @@ void LeftControl() {
   // chassis.pid_odom_set({{{-48_in, -48_in, 270_deg}, rev, 127}}, false);
   descore.set_value(0);
 
-  pros::delay(1500);
+  pros::delay(1650);
 
   chassis.pid_drive_set(6_in, DRIVE_SPEED, true);
   tongue.set_value(0);
   pros::delay(300);
   descore.set_value(1);
-  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
+  chassis.pid_drive_set(-7_in, DRIVE_SPEED, true);
 
   // chassis.pid_turn_set(-90_deg, TURN_SPEED);
   // pros::delay(100);
