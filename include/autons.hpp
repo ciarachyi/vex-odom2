@@ -23,8 +23,10 @@ void LeftControl();
 void what();
 void driveBack();
 void distanceTest();
-void control();
+// void control();
 void SoloSigWP();
+
+void RightControl();
 
 
 void practiceDistance();

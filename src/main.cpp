@@ -82,14 +82,23 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
-      {"gets long goal control, left side, 7 blocks", LeftControl},
       {"SKILLS r5 manifesting 100 pts", skillsWR},
+      {"solo sig wp ends at mid goal", newSolo},
+      {"6+3, 9 ball 2 control left", troy},
+      
+      {"right 7 hold", RightControl},
+      {"right side 4 + 3", right4p3},
+      
+      
+     
+      {"gets long goal control, left side, 7 blocks", LeftControl},
+     
       {"testing the park", parkTest},
      
-      {"solo sig wp ends at mid goal", newSolo},
-      {"right side 4 + 3", right4p3},
-      {"6+3, 9 ball 2 control left", troy},
-      {"gets long goal control, right side, 7 blocks", control},
+      
+      
+     
+      
 
       
      
@@ -113,7 +122,7 @@ void initialize() {
 
       {"Driving", driving},
 
-      {"gets long goal control, right side, 7 blocks", control},
+      // {"gets long goal control, right side, 7 blocks", control},
 
       {"testing the macro", whoo},
 
