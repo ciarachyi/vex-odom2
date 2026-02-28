@@ -85,27 +85,16 @@ void initialize() {
       {"SKILLS r5 manifesting 100 pts", skillsWR},
       {"solo sig wp ends at mid goal", newSolo},
       {"6+3, 9 ball 2 control left", troy},
-      
+
       {"right 7 hold", RightControl},
       {"right side 4 + 3", right4p3},
-      
-      
-     
-      {"gets long goal control, left side, 7 blocks", LeftControl},
-     
-      {"testing the park", parkTest},
-     
-      
-      
-     
-      
 
-      
-     
+      {"gets long goal control, left side, 7 blocks", LeftControl},
+
+      {"testing the park", parkTest},
 
       {"reverse odom test", revOdom},
 
-      
       {"RIGHT 6+3, 9 ball 2 control right", RightTroy},
 
       {"like a weird s", odom_pure_pursuit_example},

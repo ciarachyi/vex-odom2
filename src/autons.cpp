@@ -703,7 +703,7 @@ void skillsWR() {
   chassis.pid_turn_set(-45_deg, TURN_SPEED);
   pros::delay(500);
 
-  chassis.pid_odom_set({{{-5_in, 14_in}, rev, 127}}, true);
+  chassis.pid_odom_set({{{-5_in, 12_in}, rev, 127}}, true);
 
   pros::delay(300);
 
@@ -1050,7 +1050,7 @@ void skillsWR() {
   chassis.pid_drive_set(-8, 127, true);
   pros::delay(200);
 
-  chassis.pid_odom_set({{{-24_in, -52.7_in, -90_deg}, rev, 50}}, true);  // last long goal scoring
+  chassis.pid_odom_set({{{-24_in, -51_in, -90_deg}, rev, 50}}, true);  // last long goal scoring
 
   pros::delay(1000);
   tongue.set_value(0);
