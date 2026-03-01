@@ -82,12 +82,13 @@ void initialize() {
   // SWITCH THE MIDDLE GOALLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   ez::as::auton_selector.autons_add({
 
+      {"right side 4 + 3", right4p3},
       {"SKILLS r5 manifesting 100 pts", skillsWR},
-      {"solo sig wp ends at mid goal", newSolo},
       {"6+3, 9 ball 2 control left", troy},
+      {"solo sig wp ends at mid goal new", newSolo},
 
       {"right 7 hold", RightControl},
-      {"right side 4 + 3", right4p3},
+      
 
       {"gets long goal control, left side, 7 blocks", LeftControl},
 
@@ -478,12 +479,12 @@ void opcontrol() {
       intake3.move(127);
       intake2.move(127);
     } else if (master.get_digital(DIGITAL_L1)) {  // middle
-      // intake1.move(127);
-      // intake2.move(-127);
-      // intake3.move(127);
-      intake1.move(65);
-      intake2.move(-15);
-      intake3.move(60);
+      intake1.move(127);
+      intake2.move(-127);
+      intake3.move(127);
+      // intake1.move(65);
+      // intake2.move(-15);
+      // intake3.move(68);
     } else if (master.get_digital(DIGITAL_B)) {
       // intake.move(-70);
       intake1.move(-52);

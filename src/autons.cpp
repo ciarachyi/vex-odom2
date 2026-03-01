@@ -612,12 +612,13 @@ void newSolo() {
   chassis.pid_drive_set(-40, 127, true);
   pros::delay(300);
 
-  chassis.pid_odom_set({{{-15.5_in, 18.5_in}, rev, 127}}, true);
+  chassis.pid_odom_set({{{-14_in, 19.5_in}, rev, 127}}, true);
   pros::delay(1200);
-  // chassis.pid_turn_set(-45_deg, TURN_SPEED);
+  chassis.pid_turn_set(-45_deg, TURN_SPEED);
   intake1.move(60);
   intake2.move(-40);
   intake3.move(60);
+  tongue.set_value(0);
 }
 
 void parkTest() {
@@ -937,7 +938,7 @@ void skillsWR() {
 
   pros::delay(450);
 
-  chassis.pid_odom_set({{{17_in, -12_in}, rev, 127}}, true);  // y was 17
+  chassis.pid_odom_set({{{17_in, -12.5_in}, rev, 127}}, true);  // y was 17
   pros::delay(2150);
 
   intake.move(-127);
