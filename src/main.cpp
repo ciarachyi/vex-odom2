@@ -83,12 +83,14 @@ void initialize() {
   ez::as::auton_selector.autons_add({
 
       {"right side 4 + 3", right4p3},
-      {"SKILLS r5 manifesting 100 pts", skillsWR},
-      {"6+3, 9 ball 2 control left", troy},
+      {"drive forward 4 inches", straight},
+
       {"solo sig wp ends at mid goal new", newSolo},
 
+      {"SKILLS r5 manifesting 100 pts", skillsWR},
+      {"6+3, 9 ball 2 control left", troy},
+
       {"right 7 hold", RightControl},
-      
 
       {"gets long goal control, left side, 7 blocks", LeftControl},
 
@@ -102,8 +104,6 @@ void initialize() {
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
 
       {"solo sig wp", SoloSigWP},
-
-      {"drive forward 2 inches", straight},
 
       {"arc test", odom_boomerang_injected_pure_pursuit_example},
       {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},

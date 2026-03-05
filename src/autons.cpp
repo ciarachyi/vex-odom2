@@ -274,7 +274,7 @@ void good_constants() {
 }
 
 void straight() {
-  chassis.pid_drive_set(2, 127, true);
+  chassis.pid_drive_set(4, 127, true);
 }
 
 void heading() {
@@ -401,12 +401,13 @@ void right4p3() {
   pros::delay(500);
   chassis.pid_drive_set(18, 50, false);
 
-  chassis.pid_wait_until(9);
-  pros::delay(400);
+  // chassis.pid_wait_until(9);
+  pros::delay(1090);
+
   // pros::delay(360);
   // chassis.pid_targets_reset();
 
-  chassis.pid_odom_set({{{-31_in, -40.5_in, -90_deg}, rev, 127}}, true);  // first long goal
+  chassis.pid_odom_set({{{-31_in, -42_in, -90_deg}, rev, 127}}, true);  // first long goal
   pros::delay(650);
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
   pros::delay(100);
@@ -422,16 +423,16 @@ void right4p3() {
 
   pros::delay(900);
   chassis.pid_odom_set({{{-21_in, -12_in}, fwd, 127}}, true);
-  pros::delay(400);
+  pros::delay(500);
   tongue.set_value(1);
   pros::delay(700);
   tongue.set_value(0);
   pros::delay(350);
-  chassis.pid_odom_set({{{-14.5_in, -5.5_in}, fwd, 127}}, true);
+  chassis.pid_odom_set({{{-14.5_in, -5_in}, fwd, 127}}, true);
   intake.move(-95);
   pros::delay(1000);
 
-  chassis.pid_odom_set({{{-36_in, -28.5_in}, rev, 127}}, true);  // push
+  chassis.pid_odom_set({{{-36_in, -29.5_in}, rev, 127}}, true);  // push
 
   // chassis.pid_odom_set({{{-29_in, -37_in}, rev, 127}}, true);  // push
   // pros::delay(350);
